@@ -13,6 +13,7 @@ const DefinePlugin = require('webpack/lib/DefinePlugin');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlElementsPlugin = require('./html-elements-plugin');
+const TestPlugin = require('./remap-chunks-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
@@ -287,6 +288,7 @@ module.exports = function (options) {
         headTags: require('./head-config.common')
       }),
 
+      new TestPlugin(),
       /**
        * Plugin LoaderOptionsPlugin (experimental)
        *
