@@ -21,7 +21,7 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const ngcWebpack = require('ngc-webpack');
 
 const buildUtils = require('./build-utils');
-
+const glob = require('glob');
 
 /**
  * Webpack configuration
@@ -36,7 +36,8 @@ module.exports = function (options) {
 
   const entry = {
     polyfills: './src/polyfills.browser.ts',
-    main:      './src/main.browser.ts'
+    main: './src/main.browser.ts',
+    apps: glob.sync('./src/app/apps/*/index.ts')
   };
 
   Object.assign(ngcWebpackConfig.plugin, {
@@ -95,6 +96,10 @@ module.exports = function (options) {
       alias: buildUtils.rxjsAlias(supportES2015)
     },
 
+    resolveLoader: { 
+      modules: ['node_modules', helpers.root('config')]
+    },
+
     /**
      * Options affecting the normal modules.
      *
@@ -103,6 +108,7 @@ module.exports = function (options) {
     module: {
 
       rules: [
+        
         ...ngcWebpackConfig.loaders,
 
         /**

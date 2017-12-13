@@ -9,12 +9,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
  * Platform and Environment providers/directives/pipes
  */
 import { environment } from 'environments/environment';
-import { ROUTES } from './app.routes';
+import { INIT_ROUTES } from './app.routes';
 // App is our top level component
 import { AppCom } from './app.com';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.state';
 import { NotFoundCom } from './404.com';
+import { CoreMod } from './core';
+import { MainMod } from './main';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -22,7 +24,7 @@ import '../styles/headings.css';
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
-  AppState
+  AppState,
 ];
 
 type StoreType = {
@@ -48,7 +50,9 @@ type StoreType = {
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES, {
+    CoreMod.forRoot(),
+    MainMod,
+    RouterModule.forRoot(INIT_ROUTES, {
       useHash: Boolean(history.pushState) === false,
       preloadingStrategy: PreloadAllModules
     }),

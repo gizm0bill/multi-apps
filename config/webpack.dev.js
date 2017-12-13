@@ -99,10 +99,8 @@ module.exports = function (options) {
           test: /\.scss$/,
           use: ['style-loader', 'css-loader', 'sass-loader'],
           include: [helpers.root('src', 'styles')]
-        },
-
+        }
       ]
-
     },
 
     plugins: [
@@ -159,9 +157,10 @@ module.exports = function (options) {
       */
       setup: function(app) {
         // For example, to define custom handlers for some paths:
-        // app.get('/some/path', function(req, res) {
-        //   res.json({ custom: 'response' });
-        // });
+        app.get('/wtv/*', function(req, res) {
+          res.writeHead(301, {Location: 'http://localhost:3000/http://localhost:3000/'+req.url});
+          res.end();
+        });
       }
     },
 

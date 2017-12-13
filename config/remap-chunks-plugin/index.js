@@ -3,17 +3,22 @@ var sourceMappingURL = require('source-map-url')
 function TestPlugin (options) {
     this.options = extend({
         // from options
-        asyncBlocks: ['./apps/second-app', './apps/first-app']
+        apps: [
+          { second: './apps/second-app#SecondAppMod' },
+          { first: './apps/first-app#FirstAppMod' }
+        ]
     }, options || {})
 }
 
 TestPlugin.prototype.apply = function (compiler) {
     var me = this
 
+    compiler.plugin('make', function(compilation) {
+        compilation._remapChunksPluginInstance = me;
+    });
     compiler.plugin('compilation', function (compilation) {
         compilation.plugin("after-optimize-chunks", function (chunks) {
 
-            var webpackManifest = []
             chunks.forEach( (chunk, idx) =>
             {
               // TODO: worth to investigate what is up with modules
@@ -23,7 +28,7 @@ TestPlugin.prototype.apply = function (compiler) {
                 // TODO: replace with some deplay server mapping logic from options
                 const id = Math.random();
                 chunk.name = id;
-                chunk.id = 'http://localhost/wtv/' + id;
+                chunk.id = 'http://localhost:3000/wtv/' + id;
               }  
             });
         })
