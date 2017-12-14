@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { Router, RouteConfigLoadEnd, RouterEvent } from '@angular/router';
 /*
  * Platform and Environment providers/directives/pipes
  */
@@ -65,4 +65,16 @@ type StoreType = {
     APP_PROVIDERS
   ]
 })
-export class AppMod {}
+export class AppMod {
+
+  constructor( private router: Router ) {
+    router.events.subscribe( ( event: RouterEvent ) =>
+    {
+    //   if ( !( event instanceof RouteConfigLoadEnd ) ) return;
+      console.log( event );
+    //   this.router.config.splice( this.router.config.findIndex( route => event.route.path === route.path ), 1 );
+    //   console.dir( this.router.config );
+    //   this.router.resetConfig([...this.router.config]);
+    });
+  }
+}

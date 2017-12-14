@@ -9,21 +9,23 @@
     // Custom
     "trailing-comma": [false, {"multiline": "always", "singleline": "never"}],
     "interface-name": [false, "always-prefix"],
+    "one-line": [true, "check-whitespace"],
+    "curly": [false],
+    "arrow-parens": [true, "ban-single-arg-parens"],
+    "member-access": [true, "no-public"],
+    "max-classes-per-file": false,
     // Angular 2
-    "component-class-suffix": true,
+    "component-class-suffix": [true, "Com"],
     // "component-selector": [true, "element", "my", "kebab-case"],
-    "directive-class-suffix": true,
+    "directive-class-suffix": [true, "Dir"],
     // "directive-selector": [true, "attribute", "my", "camelCase"],
     "import-destructuring-spacing": true,
-    "invoke-injectable": true,
-    "no-access-missing-member": true,
     "no-attribute-parameter-decorator": true,
     "no-forward-ref": true,
     "no-input-rename": true,
     "no-output-rename": true,
     "only-arrow-functions": false,
     "pipe-naming": [true, "camelCase", "my"],
-    "templates-use-public": true,
     "use-host-property-decorator": true,
     "use-input-property-decorator": true,
     "use-life-cycle-interface": true,
@@ -37,7 +39,7 @@
     ],
     "max-line-length": [
       true,
-      100
+      120
     ],
     "no-string-literal": false,
     "no-use-before-declare": true,

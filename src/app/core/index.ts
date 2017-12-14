@@ -1,12 +1,15 @@
-import { NgModule, Optional, SkipSelf, ModuleWithProviders } from '@angular/core';
-import { CommonModule }   from '@angular/common';
-import { SomeSrv } from './some.srv';
-export { SomeSrv } from './some.srv';
+import { NgModule, Optional, SkipSelf, ModuleWithProviders, forwardRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AppAuthGuard, AuthGuard } from './auth.grd';
+import { AuthenticationSrv, AuthoritySrv } from './auth.srv';
+
+export { AppAuthGuard, AuthGuard } from './auth.grd';
+export { AuthenticationSrv, AuthoritySrv } from './auth.srv';
 
 @NgModule
 ({
   imports: [ CommonModule ],
-  providers: [ SomeSrv ]
+  providers: [ AppAuthGuard, AuthGuard, AuthenticationSrv, AuthoritySrv ]
 })
 export class CoreMod
 {
@@ -19,7 +22,7 @@ export class CoreMod
     };
   }
 
-  constructor (@Optional() @SkipSelf() parentModule: CoreMod)
+  constructor( @Optional() @SkipSelf() parentModule: CoreMod )
   {
     if (parentModule) {
       throw new Error(

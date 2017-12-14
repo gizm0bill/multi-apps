@@ -1,21 +1,16 @@
-import { Component } from '@angular/core';
-import { SomeSrv } from '../core/some.srv';
+import { Component, OnInit } from '@angular/core';
+import { AuthenticationSrv } from '../core/auth.srv';
 
-@Component({
+@Component
+({
   selector: 'main',
   template: `
-    [main com] <br />
-    <a (click)="login('auth1')">login as auth1</a> <br />
-    <a (click)="login('auth2')">login as auth2</a> <br />
-    <a (click)="login('auth3')">login as auth3</a> <br />
+    <a (click)="authSrv.login('user_role_1')">login as auth1</a> <br />
+    <a (click)="authSrv.login('user_role_2')">login as auth2</a> <br />
+    <a (click)="authSrv.login('user_role_1', 'user_role_2')">login as both</a> <br />
   `
 })
 export class MainCom
 {
-  constructor( private authSrv: SomeSrv ) {}
-
-  login( role )
-  {
-    this.authSrv.auth( role );
-  }
+  constructor( private authSrv: AuthenticationSrv ) {}
 }

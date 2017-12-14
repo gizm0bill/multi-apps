@@ -1,0 +1,14 @@
+nav
+  a( [routerLink]="['./']", routerLinkActive="active", [routerLinkActiveOptions]= "{exact: true}" )
+    | Index
+  a( [routerLink]=" ['./first'] ", routerLinkActive="active" )
+    | First
+  a( [routerLink]=" ['./second'] " )
+    | Second
+  a( [routerLink]=" ['./third'] " )
+    | Third
+  a {{loggedIn?.user}} 
+  
+main: router-outlet
+  
+footer: pre.app-state this.appState.state = {{ appState.state | json }}

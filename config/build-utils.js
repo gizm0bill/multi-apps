@@ -106,7 +106,7 @@ function ngcWebpackSetup(prod, metadata) {
   const loaders = [
     {
       test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
-      use: metadata.AOT && buildOptimizer ? [ buildOptimizerLoader, '@ngtools/webpack', 'multi-apps-loader' ] : [ 'multi-apps-loader', '@ngtools/webpack' ]
+      use: metadata.AOT && buildOptimizer ? [ buildOptimizerLoader, '@ngtools/webpack' ] : [ '@ngtools/webpack' ]
     },
     ...buildOptimizer
       ? [ { test: /\.js$/, use: [ buildOptimizerLoader ] } ]

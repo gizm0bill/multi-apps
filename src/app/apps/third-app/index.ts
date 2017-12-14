@@ -15,7 +15,7 @@ import { MainCom } from './main.com';
   ],
   // providers: [ SomeSrv ]
 })
-export class FirstAppMod {
+export class ThirdAppMod {
   static routes = ROUTES;
-  constructor() { console.log('First App constructed'); }
+  constructor() { console.log('Third App constructed'); }
 }

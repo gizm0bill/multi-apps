@@ -16,23 +16,23 @@ TestPlugin.prototype.apply = function (compiler) {
     compiler.plugin('make', function(compilation) {
         compilation._remapChunksPluginInstance = me;
     });
-    compiler.plugin('compilation', function (compilation) {
-        compilation.plugin("after-optimize-chunks", function (chunks) {
+    // compiler.plugin('compilation', function (compilation) {
+    //     compilation.plugin("after-optimize-chunks", function (chunks) {
 
-            chunks.forEach( (chunk, idx) =>
-            {
-              // TODO: worth to investigate what is up with modules
-              // now, with this logic, it gets common chunk as well
-              if ( chunk.blocks.length && chunk.blocks.every( block => me.options.asyncBlocks.indexOf(block.loc) !== -1 ) )
-              {
-                // TODO: replace with some deplay server mapping logic from options
-                const id = Math.random();
-                chunk.name = id;
-                chunk.id = 'http://localhost:3000/wtv/' + id;
-              }  
-            });
-        })
-    })
+    //         chunks.forEach( (chunk, idx) =>
+    //         {
+    //           // TODO: worth to investigate what is up with modules
+    //           // now, with this logic, it gets common chunk as well
+    //           if ( chunk.blocks.length && chunk.blocks.every( block => me.options.asyncBlocks.indexOf(block.loc) !== -1 ) )
+    //           {
+    //             // TODO: replace with some deplay server mapping logic from options
+    //             const id = Math.random();
+    //             chunk.name = id;
+    //             chunk.id = 'http://localhost:3000/wtv/' + id;
+    //           }  
+    //         });
+    //     })
+    // })
 }
 
 function extend (base) {

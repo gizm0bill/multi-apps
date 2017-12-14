@@ -32,12 +32,12 @@ module.exports = function (options) {
   const isProd = options.env === 'production';
   const METADATA = Object.assign({}, buildUtils.DEFAULT_METADATA, options.metadata || {});
   const ngcWebpackConfig = buildUtils.ngcWebpackSetup(isProd, METADATA);
+
   const supportES2015 = buildUtils.supportES2015(METADATA.tsConfigPath);
 
   const entry = {
     polyfills: './src/polyfills.browser.ts',
     main: './src/main.browser.ts',
-    apps: glob.sync('./src/app/apps/*/index.ts')
   };
 
   Object.assign(ngcWebpackConfig.plugin, {
@@ -140,7 +140,7 @@ module.exports = function (options) {
          * See: https://github.com/webpack/raw-loader
          */
         {
-          test: /\.html$/,
+          test: /\.(html|svg)$/,
           use: 'raw-loader',
           exclude: [helpers.root('src/index.html')]
         },
@@ -156,9 +156,28 @@ module.exports = function (options) {
         /* File loader for supporting fonts, for example, in CSS files.
         */
         {
-          test: /\.(eot|woff2?|svg|ttf)([\?]?.*)$/,
+          test: /\.(eot|woff2?|ttf)([\?]?.*)$/,
           use: 'file-loader'
-        }
+        },
+
+         /**
+         * Pug templates
+         * See: https://github.com/pugjs/pug-loader
+         */
+        { 
+          test: /\.(pug|jade)$/, // babel-loader because IE
+          use: 
+          [ 
+            { loader: 'apply-loader' },
+            { 
+              loader: 'babel-loader', 
+              options: 
+              { 
+                presets: ['es2015'].map(dep => require.resolve(`babel-preset-${dep}`) )
+              } 
+            }, 
+            { loader: 'pug-loader' } ]
+        },
 
       ],
 
@@ -212,7 +231,6 @@ module.exports = function (options) {
         children: true,
         minChunks: 2
       }),
-
 
       /**
        * Plugin: CopyWebpackPlugin
@@ -294,7 +312,7 @@ module.exports = function (options) {
         headTags: require('./head-config.common')
       }),
 
-      new TestPlugin(),
+      // new TestPlugin(),
       /**
        * Plugin LoaderOptionsPlugin (experimental)
        *

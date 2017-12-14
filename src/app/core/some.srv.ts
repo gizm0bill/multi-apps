@@ -9,8 +9,8 @@ export class SomeSrv
   {
     let r: Route[] =
     [
-      { path: 'second', loadChildren: '../apps/second-app#SecondAppMod' },
-      { path: 'first', loadChildren: '../apps/first-app#FirstAppMod' }
+      { path: 'second', loadChildren: './apps/second-app#SecondAppMod' },
+      { path: 'first', loadChildren: './apps/first-app#FirstAppMod' }
     ];
     this.router.resetConfig([ ...r, ...this.router.config ]);
     return 'some service method';
