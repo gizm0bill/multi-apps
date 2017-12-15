@@ -1,4 +1,9 @@
-import { NgModule, SystemJsNgModuleLoader, NgModuleFactoryLoader } from '@angular/core';
+import { NgModule, SystemJsNgModuleLoader, NgModuleFactoryLoader,
+  COMPILER_OPTIONS,
+  Compiler,
+  CompilerFactory
+} from '@angular/core';
+import { JitCompilerFactory } from '@angular/platform-browser-dynamic';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -20,6 +25,10 @@ import { MainMod } from './main';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
+
+export function createCompiler(f: CompilerFactory) {
+  return f.createCompiler();
+}
 
 // Application wide providers
 const APP_PROVIDERS =
@@ -73,6 +82,10 @@ import { DynamicCom } from './dynamic.com';
   [
     environment.ENV_PROVIDERS,
     APP_PROVIDERS,
+    // normal loadChildren routes not working with these overrides
+    {provide: COMPILER_OPTIONS, useValue: {}, multi: true},
+    {provide: CompilerFactory, useClass: JitCompilerFactory, deps: [COMPILER_OPTIONS]},
+    {provide: Compiler, useFactory: createCompiler, deps: [CompilerFactory]}
   ]
 })
 export class AppMod {

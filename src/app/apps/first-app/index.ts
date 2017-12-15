@@ -8,6 +8,7 @@ import { MainCom } from './main.com';
 
 @NgModule({
   declarations: [ MainCom, ],
+  entryComponents: [ MainCom ],
   imports:
   [
     CommonModule,

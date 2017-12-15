@@ -20,6 +20,5 @@ import { MainCom } from './main.com';
 export default class NthAppMod
 {
   static routes = ROUTES;
-  dynamicLazyLoadComponents = { MainCom };
   constructor() { console.log('Nth App constructed'); }
 }

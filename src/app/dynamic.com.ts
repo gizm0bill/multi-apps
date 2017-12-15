@@ -7,9 +7,10 @@ import
   Compiler,
   Input,
   Inject,
-  NgModuleFactory
+  NgModuleFactory,
+  NgModuleFactoryLoader
 } from '@angular/core';
-
+import { Observable } from 'rxjs/Observable';
 @Component({ selector: 'dynamic-lazy-load', template: '' })
 export class DynamicCom
 {
@@ -18,6 +19,7 @@ export class DynamicCom
     private injector: Injector,
     private viewRef: ViewContainerRef,
     private compiler: Compiler,
+    private loader: NgModuleFactoryLoader
   ) {}
 
   @Input() componentName: string;
@@ -27,25 +29,8 @@ export class DynamicCom
   private async loadLazyModule()
   {
     const lazyModule = await this._loadChildrenCallback();
-    if ( lazyModule instanceof NgModuleFactory )
-      this.createAndInsertComponent(lazyModule);
-    else
-    {
-      const compiledModule = await this.compiler.compileModuleAsync(lazyModule.default);
-      this.createAndInsertComponent(compiledModule);
-    }
-  }
 
-  createAndInsertComponent(moduleFactory: NgModuleFactory<any>) {
-    const moduleRef = moduleFactory.create(this.injector);
-    if (!moduleRef.instance.dynamicLazyLoadComponents) {
-        console.log('No Lazy Load Components Found...');
-        return;
-    }
-
-    const componentType = moduleRef.instance.dynamicLazyLoadComponents[this.componentName];
-    const componentFactoryResolver: ComponentFactoryResolver = moduleRef.componentFactoryResolver;
-    const compFactory = componentFactoryResolver.resolveComponentFactory(componentType);
-    this.viewRef.createComponent(compFactory);
+    this.compiler.compileModuleAndAllComponentsAsync(lazyModule.default)
+      .then( moduleFactory => console.log( this.viewRef.createComponent( moduleFactory.componentFactories[0] ) ) );
   }
 }

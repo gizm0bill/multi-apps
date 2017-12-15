@@ -3,7 +3,6 @@
  */
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { environment } from 'environments/environment';
-
 /**
  * App Module
  * our top level module that holds all of our components
