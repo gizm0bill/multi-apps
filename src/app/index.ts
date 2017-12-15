@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
+import { NgModule, SystemJsNgModuleLoader, NgModuleFactoryLoader } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Router, RouteConfigLoadEnd, RouterEvent } from '@angular/router';
+import { Router, RouteConfigLoadEnd, RouterEvent, provideRoutes } from '@angular/router';
 /*
  * Platform and Environment providers/directives/pipes
  */
@@ -22,37 +22,46 @@ import '../styles/styles.scss';
 import '../styles/headings.css';
 
 // Application wide providers
-const APP_PROVIDERS = [
+const APP_PROVIDERS =
+[
   ...APP_RESOLVER_PROVIDERS,
   AppState,
 ];
 
-type StoreType = {
-  state: InternalStateType,
-  restoreInputValues: () => void,
-  disposeOldHosts: () => void
-};
+interface StoreType
+{
+  state: InternalStateType;
+  restoreInputValues: () => void;
+  disposeOldHosts: () => void;
+}
+
+import { DynamicCom } from './dynamic.com';
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
  */
-@NgModule({
+@NgModule
+({
   bootstrap: [ AppCom ],
-  declarations: [
+  declarations:
+  [
     AppCom,
     NotFoundCom,
+    DynamicCom,
   ],
   /**
    * Import Angular's modules.
    */
-  imports: [
+  imports:
+  [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     CoreMod.forRoot(),
     MainMod,
-    RouterModule.forRoot(INIT_ROUTES, {
+    RouterModule.forRoot(INIT_ROUTES,
+    {
       useHash: Boolean(history.pushState) === false,
       preloadingStrategy: PreloadAllModules
     }),
@@ -60,15 +69,18 @@ type StoreType = {
   /**
    * Expose our Services and Providers into Angular's dependency injection.
    */
-  providers: [
+  providers:
+  [
     environment.ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
   ]
 })
 export class AppMod {
 
-  constructor( private router: Router ) {
-    router.events.subscribe( ( event: RouterEvent ) =>
+  constructor( private router: Router )
+  {
+    console.log( this.router );
+    this.router.events.subscribe( ( event: RouterEvent ) =>
     {
     //   if ( !( event instanceof RouteConfigLoadEnd ) ) return;
       console.log( event );

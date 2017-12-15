@@ -7,8 +7,11 @@ nav
     | Second
   a( [routerLink]=" ['./third'] " )
     | Third
+
   a {{loggedIn?.user}} 
   
 main: router-outlet
   
+dynamic-lazy-load( [loadChildrenCallback]="lazyLoadModuleCallback", componentName="MainCom" )
+
 footer: pre.app-state this.appState.state = {{ appState.state | json }}

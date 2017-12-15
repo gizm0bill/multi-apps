@@ -16,7 +16,7 @@ import { AuthenticationSrv } from './core/auth.srv';
 })
 export class AppCom implements OnInit {
 
-  loggedIn = false;
+  loggedIn: any = {};
   constructor
   (
     public appState: AppState,
@@ -28,4 +28,12 @@ export class AppCom implements OnInit {
     this.authSrv.account.subscribe( l => this.loggedIn = l );
     console.log('Initial App State', this.appState.state);
   }
+
+  lazyLoadModuleCallback = () => new Promise( resolve =>
+  {
+    require.ensure( [], require =>
+    {
+      resolve( require('./apps/nth-app/index') );
+    }, 'nth-app' );
+  })
 }

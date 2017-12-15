@@ -12,5 +12,5 @@ import { AuthenticationSrv } from '../core/auth.srv';
 })
 export class MainCom
 {
-  constructor( private authSrv: AuthenticationSrv ) {}
+  constructor( public authSrv: AuthenticationSrv ) {}
 }
