@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { environment } from 'environments/environment';
 import { AppState } from './app.state';
 import { AuthenticationSrv } from './core/auth.srv';
-
+import { Observable } from 'rxjs/Observable';
 /**
  * App Component
  * Top Level Component
@@ -11,29 +11,29 @@ import { AuthenticationSrv } from './core/auth.srv';
 ({
   selector: 'app',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: [ './app.com.css' ],
+  styleUrls: [ './app.com.scss' ],
   templateUrl: './app.com.pug'
 })
 export class AppCom implements OnInit {
 
-  loggedIn: any = {};
+  loggedIn: Observable<any>;
   constructor
   (
     public appState: AppState,
-    private authSrv: AuthenticationSrv,
+    public authSrv: AuthenticationSrv,
   ) {}
 
   ngOnInit()
   {
-    this.authSrv.account.subscribe( l => this.loggedIn = l );
+    this.loggedIn = this.authSrv.account;
     console.log('Initial App State', this.appState.state);
   }
 
-  lazyLoadModuleCallback = () => new Promise( resolve =>
-  {
-    require.ensure( [], require =>
-    {
-      resolve( require('./apps/nth-app/index') );
-    }, 'nth-app' );
-  })
+  // lazyLoadModuleCallback = () => new Promise( resolve =>
+  // {
+  //   require.ensure( [], require =>
+  //   {
+  //     resolve( require('./apps/nth-app/index') );
+  //   }, 'nth-app' );
+  // })
 }

@@ -1,12 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { NgModule, NgModuleRef } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { ROUTES } from './routes';
 import { MainCom } from './main.com';
-// import { SomeSrv } from '../../core';
+import { SomeSrv, RegistrySrv, AppModuleAccess, IAppModuleAccess } from '../../core';
 
-@NgModule({
+export const FIRST_APP_MODULE_ACCESS: IAppModuleAccess =
+{
+  roles: ['user_role_1']
+};
+@NgModule
+({
   declarations: [ MainCom, ],
   entryComponents: [ MainCom ],
   imports:
@@ -14,9 +19,18 @@ import { MainCom } from './main.com';
     CommonModule,
     RouterModule.forChild(ROUTES),
   ],
-  // providers: [ SomeSrv ]
+  providers:
+  [
+    SomeSrv,
+    { provide: AppModuleAccess, useValue: FIRST_APP_MODULE_ACCESS }
+  ]
 })
-export class FirstAppMod {
+export class FirstAppMod
+{
   static routes = ROUTES;
-  constructor() { console.log('First App constructed'); }
+  constructor( private reg: RegistrySrv, private mod: NgModuleRef<FirstAppMod> )
+  {
+    this.reg.registerApp(this.mod);
+    console.log('First App constructed');
+  }
 }

@@ -23,7 +23,11 @@ export class AuthenticationSrv
     return this.account.next({ user, authorities });
   }
 
-  logout( ) { this.account.next(false); }
+  logout()
+  {
+    localStorage.removeItem( 'account' );
+    this.account.next(false);
+  }
 
 }
 
@@ -44,4 +48,5 @@ export class AuthoritySrv
         return ( specific as string[] ).every( role => ( acc.authorities as string[] ).indexOf(role) !== -1 );
     });
   }
+
 }

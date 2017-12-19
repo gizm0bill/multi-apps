@@ -1,4 +1,8 @@
-import { NgModule, SystemJsNgModuleLoader, NgModuleFactoryLoader,
+import
+{
+  NgModule,
+  SystemJsNgModuleLoader,
+  NgModuleFactoryLoader,
   COMPILER_OPTIONS,
   Compiler,
   CompilerFactory
@@ -10,6 +14,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router, RouteConfigLoadEnd, RouterEvent, provideRoutes } from '@angular/router';
+import { MatIconModule, MatToolbarModule, MatButtonModule } from '@angular/material';
 /*
  * Platform and Environment providers/directives/pipes
  */
@@ -24,7 +29,6 @@ import { CoreMod } from './core';
 import { MainMod } from './main';
 
 import '../styles/styles.scss';
-import '../styles/headings.css';
 
 export function createCompiler(f: CompilerFactory) {
   return f.createCompiler();
@@ -67,10 +71,14 @@ import { DynamicCom } from './dynamic.com';
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatButtonModule,
     CoreMod.forRoot(),
     MainMod,
     RouterModule.forRoot(INIT_ROUTES,
     {
+      // enableTracing: environment... : true ? false,
       useHash: Boolean(history.pushState) === false,
       preloadingStrategy: PreloadAllModules
     }),
@@ -83,9 +91,9 @@ import { DynamicCom } from './dynamic.com';
     environment.ENV_PROVIDERS,
     APP_PROVIDERS,
     // normal loadChildren routes not working with these overrides
-    {provide: COMPILER_OPTIONS, useValue: {}, multi: true},
-    {provide: CompilerFactory, useClass: JitCompilerFactory, deps: [COMPILER_OPTIONS]},
-    {provide: Compiler, useFactory: createCompiler, deps: [CompilerFactory]}
+    // {provide: COMPILER_OPTIONS, useValue: {}, multi: true},
+    // {provide: CompilerFactory, useClass: JitCompilerFactory, deps: [COMPILER_OPTIONS]},
+    // {provide: Compiler, useFactory: createCompiler, deps: [CompilerFactory]}
   ]
 })
 export class AppMod {
@@ -96,7 +104,7 @@ export class AppMod {
     this.router.events.subscribe( ( event: RouterEvent ) =>
     {
     //   if ( !( event instanceof RouteConfigLoadEnd ) ) return;
-      console.log( event );
+      // console.log( event );
     //   this.router.config.splice( this.router.config.findIndex( route => event.route.path === route.path ), 1 );
     //   console.dir( this.router.config );
     //   this.router.resetConfig([...this.router.config]);

@@ -1,10 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { NgModule, NgModuleRef } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
 import { ROUTES } from './routes';
 import { MainCom } from './main.com';
-// import { SomeSrv } from '../../core';
+import { RegistrySrv, AppModuleAccess, IAppModuleAccess } from '../../core';
+
+export const THIRD_APP_MODULE_ACCESS: IAppModuleAccess =
+{
+  roles: ['user_role_1', 'user_role_2']
+};
 
 @NgModule({
   declarations: [ MainCom, ],
@@ -13,9 +17,17 @@ import { MainCom } from './main.com';
     CommonModule,
     RouterModule.forChild(ROUTES),
   ],
-  // providers: [ SomeSrv ]
+  providers:
+  [
+    { provide: AppModuleAccess, useValue: THIRD_APP_MODULE_ACCESS }
+  ]
 })
-export class ThirdAppMod {
+export class ThirdAppMod
+{
   static routes = ROUTES;
-  constructor() { console.log('Third App constructed'); }
+  constructor( private reg: RegistrySrv, private mod: NgModuleRef<ThirdAppMod> )
+  {
+    this.reg.registerApp(this.mod);
+    console.log('Third App constructed');
+  }
 }

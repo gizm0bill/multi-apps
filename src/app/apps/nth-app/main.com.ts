@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'nth-app-main',
+  selector: 'first-app-main',
   template: '[nth app]'
 })
 
-export class MainCom {}
+export class MainCom
+{
+}

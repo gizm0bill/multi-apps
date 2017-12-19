@@ -16,6 +16,8 @@
     "member-ordering": false,
     "max-classes-per-file": false,
     "space-before-function-paren": false,
+    "new-parens": false,
+    "one-variable-per-declaration": false,
     // Angular 2
     "component-class-suffix": [true, "Com"],
     // "component-selector": [true, "element", "my", "kebab-case"],

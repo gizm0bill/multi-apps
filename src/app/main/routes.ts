@@ -1,7 +1,18 @@
 import { Routes } from '@angular/router';
-import { MainCom } from './main.com';
+import { DashboardCom } from './dashboard';
+import { AuthCom } from './auth';
+import { AuthGuard } from '../core';
 
 export const ROUTES: Routes =
 [
-  { path: 'main', component: MainCom },
+  {
+    path: 'dashboard',
+    component: DashboardCom,
+    canActivate: [ AuthGuard ],
+    data: { redirectTo: ['auth'] }
+  },
+  {
+    path: 'auth',
+    component: AuthCom
+  }
 ];

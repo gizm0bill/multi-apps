@@ -1,20 +1,28 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, CanActivate, Route, ActivatedRouteSnapshot } from '@angular/router';
+import { CanLoad, CanActivate, Route, Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 import { AuthoritySrv } from './auth.srv';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthGuard implements CanLoad, CanActivate
 {
-  constructor( private auth: AuthoritySrv ) {}
+  constructor
+  (
+    private auth: AuthoritySrv,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
-  _can()
+  _can(): Observable<any> { return this.auth.hasRole(); }
+
+  canActivate(route: ActivatedRouteSnapshot): Observable<boolean>
   {
-    return this.auth.hasRole();
-  }
-  canActivate(): Observable<boolean>
-  {
-    return this._can();
+    const redirectTo = route.data.redirectTo;
+    return this._can().map( a =>
+    {
+      if ( !a && redirectTo ) this.router.navigate(redirectTo, { relativeTo: this.route });
+      return a;
+    });
   }
   canLoad(): Observable<boolean>
   {

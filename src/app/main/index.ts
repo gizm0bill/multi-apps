@@ -1,12 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { MainCom } from './main.com';
+import { MatButtonModule, MatIconModule, MatListModule } from '@angular/material';
+import { DashboardCom } from './dashboard';
+import { AuthCom } from './auth';
 import { ROUTES } from './routes';
 
 @NgModule
 ({
-  declarations: [ MainCom ],
-  imports: [ CommonModule, RouterModule.forChild(ROUTES) ]
+  declarations:
+  [
+    AuthCom,
+    DashboardCom
+  ],
+  imports:
+  [
+    CommonModule,
+    MatButtonModule,
+    MatIconModule,
+    MatListModule,
+    RouterModule.forChild(ROUTES)
+  ]
 })
 export class MainMod {}

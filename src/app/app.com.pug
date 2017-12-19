@@ -1,17 +1,12 @@
-nav
-  a( [routerLink]="['./']", routerLinkActive="active", [routerLinkActiveOptions]= "{exact: true}" )
-    | Index
-  a( [routerLink]=" ['./first'] ", routerLinkActive="active" )
-    | First
-  a( [routerLink]=" ['./second'] " )
-    | Second
-  a( [routerLink]=" ['./third'] " )
-    | Third
+mat-toolbar( color="primary" )
+  mat-toolbar-row
+    a( [routerLink]="['./']", routerLinkActive="active", [routerLinkActiveOptions]= "{exact: true}" )
+      mat-icon stars
+    small( style={ 'margin-right': '10px' } ) {{(loggedIn|async)?.user}}
+    a( (click)="authSrv.logout()" ): mat-icon exit_to_app
 
-  a {{loggedIn?.user}} 
-  
 main: router-outlet
   
-dynamic-lazy-load( [loadChildrenCallback]="lazyLoadModuleCallback", componentName="MainCom" )
+//- dynamic-lazy-load( [loadChildrenCallback]="lazyLoadModuleCallback", componentName="MainCom" )
 
 footer: pre.app-state this.appState.state = {{ appState.state | json }}

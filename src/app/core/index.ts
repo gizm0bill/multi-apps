@@ -2,14 +2,17 @@ import { NgModule, Optional, SkipSelf, ModuleWithProviders, forwardRef } from '@
 import { CommonModule } from '@angular/common';
 import { AppAuthGuard, AuthGuard } from './auth.grd';
 import { AuthenticationSrv, AuthoritySrv } from './auth.srv';
+import { RegistrySrv } from './registry.srv';
 
+export { RegistrySrv } from './registry.srv';
+export { SomeSrv } from './some.srv';
 export { AppAuthGuard, AuthGuard } from './auth.grd';
 export { AuthenticationSrv, AuthoritySrv } from './auth.srv';
 
 @NgModule
 ({
   imports: [ CommonModule ],
-  providers: [ AppAuthGuard, AuthGuard, AuthenticationSrv, AuthoritySrv ]
+  providers: [ AppAuthGuard, AuthGuard, AuthenticationSrv, AuthoritySrv, RegistrySrv ]
 })
 export class CoreMod
 {
@@ -30,3 +33,10 @@ export class CoreMod
     }
   }
 }
+
+import { InjectionToken } from '@angular/core';
+export interface IAppModuleAccess
+{
+  roles: string[];
+}
+export let AppModuleAccess = new InjectionToken<IAppModuleAccess>('app.module.access');

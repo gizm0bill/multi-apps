@@ -1,0 +1,8 @@
+| [ le dashboard ]
+
+mat-list
+  h3( mat-subheader ) Getting lekker Apps:
+  mat-list-item( *ngFor="let app of lekkerApps" )
+    mat-icon( mat-list-icon ) extension
+    h4( mat-line ) {{app.name|async}}
+    p( mat-line ) allowed for: #[em {{app.roles.join(', ')||'any'}}]
