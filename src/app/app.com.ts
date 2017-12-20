@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 import { environment } from 'environments/environment';
 import { AppState } from './app.state';
 import { AuthenticationSrv } from './core/auth.srv';
@@ -20,13 +21,20 @@ export class AppCom implements OnInit {
   constructor
   (
     public appState: AppState,
-    public authSrv: AuthenticationSrv,
+    private authSrv: AuthenticationSrv,
+    private router: Router
   ) {}
 
   ngOnInit()
   {
     this.loggedIn = this.authSrv.account;
     console.log('Initial App State', this.appState.state);
+  }
+
+  logout()
+  {
+    this.authSrv.logout();
+    this.router.navigate(['/auth']);
   }
 
   // lazyLoadModuleCallback = () => new Promise( resolve =>

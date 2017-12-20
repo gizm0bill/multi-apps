@@ -1,5 +1,13 @@
 @import '../styles/vars';
 
+app
+{
+  height: 100%;
+  display: grid;
+  grid-template-rows: 64px 1fr 64px;
+  grid-row-gap: 16px;
+}
+
 .mat-toolbar
 {
   .mat-toolbar-row

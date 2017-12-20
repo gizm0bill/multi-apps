@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationSrv } from '../../core';
 
 @Component
 ({
   selector: 'main-auth',
-  templateUrl: './com.pug'
+  templateUrl: './com.pug',
+  styleUrls: ['./com.scss']
 })
 export class AuthCom
 {
-  constructor( public authSrv: AuthenticationSrv ) {}
+  constructor( public authSrv: AuthenticationSrv, private router: Router ) {}
+  goHome() { this.router.navigateByUrl('/'); }
 }

@@ -1,8 +1,14 @@
-| [ le dashboard ]
+//- mat-list
+//-   h3( mat-subheader ) Lekkere Apps krijgen:
+//-   mat-list-item( *ngFor="let app of lekkerApps" )
+//-     mat-icon( mat-list-icon ) extension
+//-     h4( mat-line ) {{(app.name|async)||'...'}}
+//-     p( mat-line ) 🔑 &nbsp; {{app.roles?.join(', ')||'any'}}
 
-mat-list
-  h3( mat-subheader ) Getting lekker Apps:
-  mat-list-item( *ngFor="let app of lekkerApps" )
-    mat-icon( mat-list-icon ) extension
-    h4( mat-line ) {{app.name|async}}
-    p( mat-line ) allowed for: #[em {{app.roles.join(', ')||'any'}}]
+mat-grid-list( [cols]="maxGridWidth", rowHeight="100px" )
+  mat-grid-tile( *ngFor="let app of lekkerApps",
+    [colspan]="app.weight||1" )
+    .app
+      mat-icon {{app.icon}}
+      h4 {{(app.name|async)||'...'}}
+      p 🔑 &nbsp; {{app.roles?.join(', ')||'any'}}

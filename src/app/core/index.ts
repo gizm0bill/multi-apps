@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { AppAuthGuard, AuthGuard } from './auth.grd';
 import { AuthenticationSrv, AuthoritySrv } from './auth.srv';
 import { RegistrySrv } from './registry.srv';
-
+import { Observable } from 'rxjs/Observable';
+// exports
 export { RegistrySrv } from './registry.srv';
 export { SomeSrv } from './some.srv';
 export { AppAuthGuard, AuthGuard } from './auth.grd';
@@ -35,8 +36,11 @@ export class CoreMod
 }
 
 import { InjectionToken } from '@angular/core';
-export interface IAppModuleAccess
+export interface IAppModuleConfig
 {
-  roles: string[];
+  roles: Observable<string[]>;
+  // example props
+  weight?: number;
+  icon?: string;
 }
-export let AppModuleAccess = new InjectionToken<IAppModuleAccess>('app.module.access');
+export let AppModuleAccess = new InjectionToken<IAppModuleConfig>('app.module.access');

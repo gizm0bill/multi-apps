@@ -3,11 +3,15 @@ import { NgModule, NgModuleRef } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './routes';
 import { MainCom } from './main.com';
-import { SomeSrv, RegistrySrv, AppModuleAccess, IAppModuleAccess } from '../../core';
+import { SomeSrv, RegistrySrv, AppModuleAccess, IAppModuleConfig } from '../../core';
+import { of } from 'rxjs/observable/of';
+import { delay, map } from 'rxjs/operators';
 
-export const SECOND_APP_MODULE_ACCESS: IAppModuleAccess =
+export const SECOND_APP_MODULE_ACCESS: IAppModuleConfig =
 {
-  roles: ['user_role_2']
+  roles: of(['user_role_2']).pipe( delay( Math.random() * 10000 / 3) ),
+  weight: 2,
+  icon: 'trending_up'
 };
 
 @NgModule({

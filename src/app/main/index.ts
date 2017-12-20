@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { MatButtonModule, MatIconModule, MatListModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatGridListModule } from '@angular/material';
 import { DashboardCom } from './dashboard';
 import { AuthCom } from './auth';
 import { ROUTES } from './routes';
@@ -18,7 +18,7 @@ import { ROUTES } from './routes';
     CommonModule,
     MatButtonModule,
     MatIconModule,
-    MatListModule,
+    MatGridListModule,
     RouterModule.forChild(ROUTES)
   ]
 })

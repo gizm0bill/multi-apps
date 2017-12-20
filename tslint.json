@@ -18,6 +18,7 @@
     "space-before-function-paren": false,
     "new-parens": false,
     "one-variable-per-declaration": false,
+    "no-conditional-assignment": false,
     // Angular 2
     "component-class-suffix": [true, "Com"],
     // "component-selector": [true, "element", "my", "kebab-case"],

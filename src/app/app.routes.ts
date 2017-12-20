@@ -7,6 +7,7 @@ export const INIT_ROUTES: Routes = [
   {
     path: '',
     canActivate: [AuthGuard],
+    data: { appsPlaceholder: true },
     children:
     [
       {

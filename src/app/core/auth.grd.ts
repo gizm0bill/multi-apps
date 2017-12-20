@@ -1,19 +1,23 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, CanActivate, Route, Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
-import { AuthoritySrv } from './auth.srv';
+import { CanLoad, CanActivate, Route, Router,
+   ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
+import { AuthoritySrv, AuthenticationSrv } from './auth.srv';
 import { Observable } from 'rxjs/Observable';
+import { switchMap } from 'rxjs/operators';
+import { LoadedRouterConfig } from '@angular/router/src/config';
+import { AppModuleAccess, IAppModuleConfig } from './';
 
 @Injectable()
 export class AuthGuard implements CanLoad, CanActivate
 {
   constructor
   (
-    private auth: AuthoritySrv,
+    private auth: AuthenticationSrv,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
-  _can(): Observable<any> { return this.auth.hasRole(); }
+  _can(): Observable<any> { return this.auth.account.take(1).map( a => !!a ); }
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean>
   {
@@ -41,7 +45,18 @@ export class AppAuthGuard implements CanActivate, CanLoad
   }
   canActivate(route: ActivatedRouteSnapshot)
   {
-    return this._can( route.data.authorities );
+    // TODO: hacky
+    let module;
+    if ( route.routeConfig.loadChildren &&
+      // TODO: https://github.com/angular/angular/blob/5.1.x/packages/router/src/router_preloader.ts#L128
+      ( {module} = (( route.routeConfig as any )._loadedConfig as LoadedRouterConfig )) )
+
+      return ( module.injector.get(AppModuleAccess) as IAppModuleConfig ).roles
+      .pipe( switchMap( this._can.bind(this) ) );
+
+    if ( route.data.authorities) return this._can( route.data.authorities );
+
+    return false;
   }
   canLoad(route: Route)
   {
