@@ -16,7 +16,7 @@ export class AuthenticationSrv
   // login( user: string, pass: string, remember?: boolean )
   login( ...args: any[] )
   {
-    const user = 'John ' + args.map( a => a.replace(/[^\d]*/, '') ).join(', ');
+    const user = 'John 🔑 ' + args.map( a => a.replace(/[^\d]*/, '') ).join(', ');
     const authorities = args;
     // if ( remember )
     localStorage.setItem( 'account', JSON.stringify({ user, authorities }) );
@@ -36,6 +36,10 @@ export class AuthoritySrv
 {
   constructor( private auth: AuthenticationSrv ) {}
 
+  /**
+   * decide if user has any or a specific role
+   * @param specific what role or list of roles to check of
+   */
   hasRole(specific?: string|string[]): Observable<any>
   {
     return this.auth.account.take(1).map( (acc: any) =>

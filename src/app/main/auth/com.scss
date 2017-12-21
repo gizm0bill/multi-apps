@@ -1,0 +1,13 @@
+.logins
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  > *
+  {
+    margin: 10px 0;
+    min-width: 200px;
+    text-align: left;
+  }
+}

@@ -3,7 +3,7 @@ mat-toolbar( color="primary" )
     a( [routerLink]="['./']", routerLinkActive="active", [routerLinkActiveOptions]= "{exact: true}" )
       mat-icon stars
     small( style={ 'margin-right': '10px' } ) {{(loggedIn|async)?.user}}
-    a( (click)="logout()" ): mat-icon exit_to_app
+    a( (click)="logout()", *ngIf="(loggedIn|async)" ): mat-icon exit_to_app
 
 main: router-outlet
   

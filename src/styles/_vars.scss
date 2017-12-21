@@ -1,1 +1,13 @@
+@import '~@angular/material/theming';
+@include mat-core();
+$candy-app-primary: mat-palette($mat-indigo);
+$candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+$candy-app-warn: mat-palette($mat-red);
+$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+
 $white: #fff;
+$lighterRed: mat-color( $candy-app-warn, 50 );
+$lighterPink: mat-color( $candy-app-accent, 50 );
+$lighterBlue: mat-color( $candy-app-primary, 50 );
+$lighterGreen: mat-color( mat-palette($mat-green), 50 );
+$lighterYellow: mat-color( mat-palette($mat-yellow), 50 );

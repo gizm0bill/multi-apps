@@ -5,7 +5,7 @@ import { AuthoritySrv, AuthenticationSrv } from './auth.srv';
 import { Observable } from 'rxjs/Observable';
 import { switchMap } from 'rxjs/operators';
 import { LoadedRouterConfig } from '@angular/router/src/config';
-import { AppModuleAccess, IAppModuleConfig } from './';
+import { AppModuleConfig, IAppModuleConfig } from './';
 
 @Injectable()
 export class AuthGuard implements CanLoad, CanActivate
@@ -45,15 +45,15 @@ export class AppAuthGuard implements CanActivate, CanLoad
   }
   canActivate(route: ActivatedRouteSnapshot)
   {
-    // TODO: hacky
+    // TODO: hacky, makes use of _loadedConfig, a prop added on RouterPreloader.preloadConfig
     let module;
     if ( route.routeConfig.loadChildren &&
       // TODO: https://github.com/angular/angular/blob/5.1.x/packages/router/src/router_preloader.ts#L128
       ( {module} = (( route.routeConfig as any )._loadedConfig as LoadedRouterConfig )) )
+      return ( module.injector.get(AppModuleConfig) as IAppModuleConfig )
+        .roles.pipe( switchMap( this._can.bind(this) ) );
 
-      return ( module.injector.get(AppModuleAccess) as IAppModuleConfig ).roles
-      .pipe( switchMap( this._can.bind(this) ) );
-
+    // or check hardcodded config from router data
     if ( route.data.authorities) return this._can( route.data.authorities );
 
     return false;

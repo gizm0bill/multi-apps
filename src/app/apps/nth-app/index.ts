@@ -1,16 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, NgModuleRef } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { MatListModule, MatIconModule } from '@angular/material';
 import { ROUTES } from './routes';
 import { MainCom } from './main.com';
-import { RegistrySrv, AppModuleAccess, IAppModuleConfig } from '../../core';
+import { RegistrySrv, AppModuleConfig, IAppModuleConfig } from '../../core';
 import { of } from 'rxjs/observable/of';
-import { delay, map } from 'rxjs/operators';
+import { delay } from 'rxjs/operators';
 
 export const NTH_APP_MODULE_ACCESS: IAppModuleConfig =
 {
-  roles: of([]).pipe( delay( Math.random() * 10000 / 3) ),
+  roles: of([]).pipe( delay( Math.random() * 10000 / 9) ),
   weight: 1,
+  order: 3,
   icon: 'contacts'
 };
 
@@ -21,16 +23,19 @@ export const NTH_APP_MODULE_ACCESS: IAppModuleConfig =
   imports:
   [
     CommonModule,
+    MatListModule,
+    MatIconModule,
     RouterModule.forChild(ROUTES),
   ],
   providers:
   [
-    { provide: AppModuleAccess, useValue: NTH_APP_MODULE_ACCESS }
+    { provide: AppModuleConfig, useValue: NTH_APP_MODULE_ACCESS }
   ]
 })
 export class NthAppMod
 {
   static routes = ROUTES;
+  static appName = 'List App';
   constructor( private reg: RegistrySrv, private mod: NgModuleRef<NthAppMod> )
   {
     this.reg.registerApp(this.mod);

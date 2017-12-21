@@ -1,18 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { RegistrySrv, AppModuleAccess, AuthenticationSrv, AuthoritySrv } from '../../core';
+import { Component, OnInit, HostBinding } from '@angular/core';
+import { Router } from '@angular/router';
+import { trigger, state, transition, keyframes, animate, style } from '@angular/animations';
 import { defer }  from 'rxjs/observable/defer';
 import { of }     from 'rxjs/observable/of';
 import { delay, take, map, switchMap, flatMap }  from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { RegistrySrv, AppModuleConfig, AuthenticationSrv, AuthoritySrv } from '../../core';
 
 @Component
 ({
   selector: 'dashboard',
   templateUrl: './com.pug',
-  styleUrls: ['./com.scss']
+  styleUrls: ['./com.scss'],
+  animations:
+  [
+    trigger('flyIn',
+    [
+      state('in', style({transform: 'translateY(0)'})),
+      transition('void => *',
+      [
+        animate(300, keyframes
+        ([
+          style({opacity: 0, transform: 'translateY(-50%)', offset: 0}),
+          style({opacity: 1, transform: 'translateY(15px)', offset: 0.3}),
+          style({opacity: 1, transform: 'translateY(0)', offset: 1.0})
+        ]))
+      ]),
+    ]),
+    trigger('fadeOut', [ transition('* => void', [ animate(300, style({opacity: 0})) ]) ])
+  ]
 })
 export class DashboardCom implements OnInit
 {
+  @HostBinding('@fadeOut') fadeOut = true;
   constructor
   (
     private reg: RegistrySrv,
@@ -25,8 +44,7 @@ export class DashboardCom implements OnInit
   lekkerApps: any[] = [];
   ngOnInit()
   {
-    const apps = this.router.config.find( config => config.data && config.data.appsPlaceholder ).children;
-
+    // see what loaded apps the user has access to
     this.auth.account.pipe
     (
       take(1),
@@ -35,17 +53,18 @@ export class DashboardCom implements OnInit
       {
         return this.reg.apps.pipe
         (
-          map( module => ({ module, config: module.injector.get(AppModuleAccess)}) ),
+          map( module => ({ module, config: module.injector.get(AppModuleConfig)}) ),
           flatMap( ({module, config}) => config.roles, ( {module, config}, roles ) => ({ module, ...config, roles }) ),
           map( ({ module, roles, ...stuff}) =>
           {
             if ( roles.every( role => authorities.indexOf( role ) !== -1 ) )
-              this.lekkerApps.push
-              ({
+              this.lekkerApps[ stuff.order ] =
+              {
                 // H4xX for infiloop - angular calling contructor on `instance` prop ¯\_(ツ)_/¯
-                name: defer( () => of(module.instance.constructor.name) ).pipe(delay( Math.random() * 10000 / 3 )),
+                // tbh setTimeout woulda sufficed
+                name: defer( () => of(module.instance.constructor.appName) ).pipe(delay( Math.random() * 10000 / 9 )),
                 roles, ...stuff
-              });
+              };
           })
         );
       })

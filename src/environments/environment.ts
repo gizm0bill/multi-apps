@@ -3,11 +3,13 @@
 import { ApplicationRef, NgModuleRef } from '@angular/core';
 import { enableDebugTools } from '@angular/platform-browser';
 import { Environment } from './model';
+import { AppAuthGuard } from '../app/core/auth.grd';
 
 Error.stackTraceLimit = Infinity;
 require('zone.js/dist/long-stack-trace-zone');
 
-export const environment: Environment = {
+export const environment: Environment = 
+{
   production: false,
 
   showDevModule: true,
@@ -27,8 +29,32 @@ export const environment: Environment = {
     (<any>window).ng.coreTokens = _ng.coreTokens;
     return modRef;
   },
-  ENV_PROVIDERS: [
-
-  ]
+  ENV_PROVIDERS: [],
+  appRoutes:
+  [{
+    path: 'second',
+    loadChildren: './apps/second-app#SecondAppMod',
+    canActivate: [ AppAuthGuard ],
+    data: { authorities: ['user_role_2'] }
+  },
+  {
+    path: 'first',
+    loadChildren: './apps/first-app#FirstAppMod',
+    canActivate: [ AppAuthGuard ],
+    data: { authorities: ['user_role_1'] }
+  },
+  {
+    path: 'third',
+    loadChildren: './apps/third-app#ThirdAppMod',
+    // canLoad: [ AppAuthGuard ], won't report if not loaded
+    canActivate: [ AppAuthGuard ],
+    // data: { authorities: ['user_role_1', 'user_role_2'] }
+  },
+  {
+    path: 'nth',
+    loadChildren: './apps/nth-app#NthAppMod',
+    canActivate: [ AppAuthGuard ],
+    // data: { authorities: ['user_role_2'] }
+  }]
 };
 

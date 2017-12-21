@@ -2,10 +2,12 @@
 import { enableProdMode, NgModuleRef } from '@angular/core';
 import { disableDebugTools } from '@angular/platform-browser';
 import { Environment } from './model';
+import { AppAuthGuard } from '../app/core/auth.grd';
 
 enableProdMode();
 
-export const environment: Environment = {
+export const environment: Environment =
+{
   production: true,
   showDevModule: true,
 
@@ -14,11 +16,31 @@ export const environment: Environment = {
    * @param modRef
    * @return {any}
    */
-  decorateModuleRef(modRef: NgModuleRef<any>) {
+  decorateModuleRef(modRef: NgModuleRef<any>)
+  {
     disableDebugTools();
     return modRef;
   },
-  ENV_PROVIDERS: [
-
-  ]
+  ENV_PROVIDERS: [],
+  appRoutes:
+  [{
+    path: 'prod-second',
+    loadChildren: './apps/second-app#SecondAppMod',
+    canActivate: [ AppAuthGuard ],
+  },
+  {
+    path: 'prod-first',
+    loadChildren: './apps/first-app#FirstAppMod',
+    canActivate: [ AppAuthGuard ],
+  },
+  {
+    path: 'prod-third',
+    loadChildren: './apps/third-app#ThirdAppMod',
+    canActivate: [ AppAuthGuard ],
+  },
+  {
+    path: 'prod-nth',
+    loadChildren: './apps/nth-app#NthAppMod',
+    canActivate: [ AppAuthGuard ],
+  }]
 };
