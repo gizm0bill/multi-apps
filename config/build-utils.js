@@ -77,12 +77,7 @@ function ngcWebpackSetup(prod, metadata)
   const ngcWebpackPluginOptions =
   {
     skipCodeGeneration: !metadata.AOT,
-    sourceMap,
-    i18nInFile: helpers.root('src', 'assets', 'i18n', 'messages.nl.xlf'),
-    i18nInFormat: "xlf",
-    locale: "nl",
-    i18nOutFile: helpers.root('dist', 'assets', 'i18n', '_.nl.xlf'),
-    i18nOutFormat: "xlf"
+    sourceMap
   };
 
   const environment = getEnvFile(metadata.envFileSuffix);

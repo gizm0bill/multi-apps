@@ -43,10 +43,12 @@ function getUglifyOptions (supportES2015) {
   };
 }
 
-module.exports = function (env) {
+module.exports = function (env)
+{
   const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
   const supportES2015 = buildUtils.supportES2015(buildUtils.DEFAULT_METADATA.tsConfigPath);
-  const METADATA = Object.assign({}, buildUtils.DEFAULT_METADATA, {
+  const METADATA = Object.assign({}, env, buildUtils.DEFAULT_METADATA,
+  {
     host: process.env.HOST || 'localhost',
     port: process.env.PORT || 8080,
     ENV: ENV,

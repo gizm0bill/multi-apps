@@ -24,23 +24,40 @@ const glob = require('glob');
  *
  * See: http://webpack.github.io/docs/configuration.html#cli
  */
-module.exports = function (options) {
+module.exports = function (options)
+{
   const isProd = options.env === 'production';
   const METADATA = Object.assign({}, buildUtils.DEFAULT_METADATA, options.metadata || {});
   const ngcWebpackConfig = buildUtils.ngcWebpackSetup(isProd, METADATA);
 
   const supportES2015 = buildUtils.supportES2015(METADATA.tsConfigPath);
 
-  const entry = {
+  const entry =
+  {
     polyfills: './src/polyfills.browser.ts',
     main: './src/main.browser.ts',
   };
 
-  Object.assign(ngcWebpackConfig.plugin, {
+  const i18n = {};
+
+  if ( METADATA.locale ) 
+  {
+    i18n.i18nInFile = helpers.root('src', 'i18n', METADATA.locale + '.xlf');
+    i18n.i18nInFormat = "xlf";
+    i18n.locale = METADATA.locale;
+  }
+  if ( METADATA.xi18n )
+  {
+    i18n.i18nOutFile = helpers.root('src', 'i18n', '_.xlf');
+    i18n.i18nOutFormat = "xlf";
+  }
+
+  Object.assign(ngcWebpackConfig.plugin, i18n,
+  {
     tsConfigPath: METADATA.tsConfigPath,
     mainPath: entry.main
   });
-
+  
   return {
     /**
      * The entry point for the bundle
