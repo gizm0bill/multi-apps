@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="f110930a7d2291b52ed67fd9034132851ce15a00" datatype="html">
+        <source>Hello</source>
+        <target>Hallo</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/dashboard/com.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="81db8eb8378f80cf88b67d7420d3cdf773807839" datatype="html">
+        <source>Updated <x id="ICU" equiv-text="{ minutes, plural, =0 {...} one {...} =2 {...} few {...} many {...} other {...}}"/></source>
+        <target><x id="ICU" equiv-text="{ minutes, plural, =0 {...} one {...} =2 {...} few {...} many {...} other {...}}"/> bijgewerkt</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/dashboard/com.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="772f1cb9e96dc51750b5bb74acf1e9f0196e4cf5" datatype="html">
+        <source>{VAR_PLURAL, plural, =0 {just now} one {one minute ago} =2 {a couple of minutes ago} few {a few minutes ago} many {many minutes ago} other {<x id="INTERPOLATION" equiv-text="{{minutes}}"/> minutes ago } }</source>
+        <target>{VAR_PLURAL, plural, =0 {zojuist} one {een minuut geleden} =2 {twee minuten geleden} few {a few minutes ago} many {many minutes ago} other {<x id="INTERPOLATION" equiv-text="{{minutes}}"/> minuten geleden } }</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/main/dashboard/com.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e02cb2c40ada66b770827009ecda54ea6bc654b5" datatype="html">
+        <source>One fish</source>
+        <target>Een vis</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/apps/second-app/main.com.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1245377f2029bb114f53cf24a65b3aed7406b659" datatype="html">
+        <source>Two fish</source>
+        <target>Twee vissen</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/apps/second-app/main.com.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ecb0f54cb2272c56274163b1f2744a39f758d0a3" datatype="html">
+        <source>Primary fish</source>
+        <target>Primaire vis</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/apps/second-app/main.com.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="42dd95b30a41b04545818d1325e660aa472a8fad" datatype="html">
+        <source>Accent fish</source>
+        <target>Accent vis</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/apps/second-app/main.com.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="01b5e052eba8f8385b3fc4c7525ce4f63d3eac04" datatype="html">
+        <source>Warning fish</source>
+        <target>Waarschuwing vis</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/apps/second-app/main.com.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -40,10 +40,12 @@ export class DashboardCom implements OnInit
     private authy: AuthoritySrv
   ) {}
 
+  minutes = 0;
   maxGridWidth = 4;
   lekkerApps: any[] = [];
   ngOnInit()
   {
+    setInterval( () => this.minutes += 1, 3000);
     // see what loaded apps the user has access to
     this.auth.account.pipe
     (

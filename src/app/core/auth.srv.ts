@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/take';
-import 'rxjs/add/observable/throw';
+import { take, map } from 'rxjs/operators';
 
 @Injectable()
 export class AuthenticationSrv
@@ -42,7 +40,7 @@ export class AuthoritySrv
    */
   hasRole(specific?: string|string[]): Observable<any>
   {
-    return this.auth.account.take(1).map( (acc: any) =>
+    return this.auth.account.pipe( take(1), map( (acc: any) =>
     {
       if ( !acc ) return false;
       if ( typeof specific === 'string' ) specific = [specific];
@@ -50,7 +48,7 @@ export class AuthoritySrv
         return !!( acc.authorities as string[] ).length;
       if ( specific )
         return ( specific as string[] ).every( role => ( acc.authorities as string[] ).indexOf(role) !== -1 );
-    });
+    }));
   }
 
 }

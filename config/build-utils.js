@@ -3,7 +3,8 @@ const path = require('path');
 const fs = require('fs');
 const helpers = require('./helpers');
 
-const DEFAULT_METADATA = {
+const DEFAULT_METADATA =
+{
   title: '💫',
   baseUrl: '/',
   isDevServer: helpers.isWebpackDevServer(),
@@ -20,38 +21,35 @@ const DEFAULT_METADATA = {
   envFileSuffix: ''
 };
 
-function supportES2015(tsConfigPath) {
-  if (!supportES2015.hasOwnProperty('supportES2015')) {
+function supportES2015(tsConfigPath)
+{
+  if (!supportES2015.hasOwnProperty('supportES2015'))
+  {
     const tsTarget = readTsConfig(tsConfigPath).options.target;
     supportES2015['supportES2015'] = tsTarget !== ts.ScriptTarget.ES3 && tsTarget !== ts.ScriptTarget.ES5;
   }
   return supportES2015['supportES2015'];
 }
 
-function readTsConfig(tsConfigPath) {
+function readTsConfig(tsConfigPath)
+{
   const configResult = ts.readConfigFile(tsConfigPath, ts.sys.readFile);
   return ts.parseJsonConfigFileContent(configResult.config, ts.sys,
     path.dirname(tsConfigPath), undefined, tsConfigPath);
 }
 
-function getEnvFile(suffix) {
-  if (suffix && suffix[0] !== '.') {
-    suffix = '.' + suffix;
-  }
-
-  if (suffix === null) {
-    return;
-  }
-
+function getEnvFile(suffix)
+{
+  if (suffix && suffix[0] !== '.') suffix = '.' + suffix;
+  if (suffix === null) return;
   let fileName = helpers.root(`src/environments/environment${suffix}.ts`);
-  if (fs.existsSync(fileName)) {
+  if (fs.existsSync(fileName)) 
     return fileName;
-  } else if (fs.existsSync(fileName = helpers.root('src/environments/environment.ts'))) {
+  else if (fs.existsSync(fileName = helpers.root('src/environments/environment.ts'))) {
     console.warn(`Could not find environment file with suffix ${suffix}, loading default environment file`);
     return fileName;
-  } else {
+  } else
     throw new Error('Environment file not found.')
-  }
 }
 
 /**
@@ -60,50 +58,56 @@ function getEnvFile(suffix) {
  * https://github.com/ReactiveX/rxjs/blob/master/doc/lettable-operators.md#build-and-treeshaking
  * @param supportES2015 Set to true when the output of typescript is >= ES6
  */
-function rxjsAlias(supportES2015) {
-  try {
+function rxjsAlias(supportES2015)
+{
+  try
+  {
     const rxjsPathMappingImport = supportES2015 ? 'rxjs/_esm2015/path-mapping' : 'rxjs/_esm5/path-mapping';
     const rxPaths = require(rxjsPathMappingImport);
     return rxPaths(helpers.root('node_modules'));
-  } catch (e) {
-    return {};
-  }
+  } catch (e) { return {}; }
 }
 
-function ngcWebpackSetup(prod, metadata) {
-  if (!metadata) {
-    metadata = DEFAULT_METADATA;
-  }
+function ngcWebpackSetup(prod, metadata)
+{
+  if ( !metadata ) metadata = DEFAULT_METADATA;
 
   const buildOptimizer = prod;
   const sourceMap = true; // TODO: apply based on tsconfig value?
-  const ngcWebpackPluginOptions = {
+  const ngcWebpackPluginOptions =
+  {
     skipCodeGeneration: !metadata.AOT,
-    sourceMap
+    sourceMap,
+    i18nInFile: helpers.root('src', 'assets', 'i18n', 'messages.nl.xlf'),
+    i18nInFormat: "xlf",
+    locale: "nl",
+    i18nOutFile: helpers.root('dist', 'assets', 'i18n', '_.nl.xlf'),
+    i18nOutFormat: "xlf"
   };
 
   const environment = getEnvFile(metadata.envFileSuffix);
-  if (environment) {
-    ngcWebpackPluginOptions.hostReplacementPaths = {
-      [helpers.root('src/environments/environment.ts')]: environment
+  if (environment)
+  {
+    ngcWebpackPluginOptions.hostReplacementPaths =
+    {
+      [helpers.root('src', 'environments', 'environment.ts')]: environment
     }
   }
 
-  if (!prod && metadata.WATCH) {
+  if (!prod && metadata.WATCH)
+  {
     // Force commonjs module format for TS on dev watch builds.
-    ngcWebpackPluginOptions.compilerOptions = {
-      module: 'commonjs'
-    };
+    ngcWebpackPluginOptions.compilerOptions = { module: 'commonjs' };
   }
 
-  const buildOptimizerLoader = {
+  const buildOptimizerLoader =
+  {
     loader: '@angular-devkit/build-optimizer/webpack-loader',
-    options: {
-      sourceMap
-    }
+    options: { sourceMap }
   };
 
-  const loaders = [
+  const loaders =
+  [
     {
       test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
       use: metadata.AOT && buildOptimizer ? [ buildOptimizerLoader, '@ngtools/webpack' ] : [ '@ngtools/webpack' ]
@@ -118,7 +122,6 @@ function ngcWebpackSetup(prod, metadata) {
     plugin: ngcWebpackPluginOptions
   };
 }
-
 
 exports.DEFAULT_METADATA = DEFAULT_METADATA;
 exports.supportES2015 = supportES2015;

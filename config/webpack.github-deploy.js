@@ -1,6 +1,3 @@
-/**
- * @author: @AngularClass
- */
 const fs = require('fs');
 const path = require('path');
 const helpers = require('./helpers');
@@ -23,8 +20,10 @@ module.exports = function (options) {
    */
   ghDeploy.replaceHtmlWebpackPlugin(webpackConfig.plugins, GH_REPO_NAME);
 
-  return webpackMerge(webpackConfig, {
-   output: {
+  return webpackMerge(webpackConfig,
+  {
+   output:
+   {
      /**
       * The public path is set to the REPO name.
       *
@@ -41,14 +40,17 @@ module.exports = function (options) {
      publicPath: '/' + GH_REPO_NAME + '/' + ghDeploy.safeUrl(webpackConfig.output.publicPath)
    },
 
-   plugins: [
-     function() {
-       this.plugin('done', function(stats) {
-         console.log('Starting deployment to GitHub.');
+   plugins:
+   [
+     function()
+     {
+       this.plugin('done', function(stats)
+       {
+        console.log('Starting deployment to GitHub.');
 
-         const logger = function (msg) {
-           console.log(msg);
-         };
+        const logger = function (msg) {
+          console.log(msg);
+        };
 
          const options = {
            logger: logger,

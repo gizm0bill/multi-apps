@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { CanLoad, CanActivate, Route, Router,
    ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
-import { AuthoritySrv, AuthenticationSrv } from './auth.srv';
-import { Observable } from 'rxjs/Observable';
-import { switchMap } from 'rxjs/operators';
 import { LoadedRouterConfig } from '@angular/router/src/config';
-import { AppModuleConfig, IAppModuleConfig } from './';
+import { Observable } from 'rxjs/Observable';
+import { take, map, switchMap } from 'rxjs/operators';
+import { AuthoritySrv, AuthenticationSrv,
+  AppModuleConfig, IAppModuleConfig } from './';
 
 @Injectable()
 export class AuthGuard implements CanLoad, CanActivate
@@ -17,16 +17,16 @@ export class AuthGuard implements CanLoad, CanActivate
     private route: ActivatedRoute
   ) {}
 
-  _can(): Observable<any> { return this.auth.account.take(1).map( a => !!a ); }
+  _can(): Observable<any> { return this.auth.account.pipe( take(1), map( a => !!a ) ); }
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean>
   {
     const redirectTo = route.data.redirectTo;
-    return this._can().map( a =>
+    return this._can().pipe( map( a =>
     {
       if ( !a && redirectTo ) this.router.navigate(redirectTo, { relativeTo: this.route });
       return a;
-    });
+    }));
   }
   canLoad(): Observable<boolean>
   {
