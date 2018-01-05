@@ -25,7 +25,7 @@ import { AppState, InternalStateType } from './app.state';
 import { NotFoundCom } from './404.com';
 import { CoreMod } from './core';
 import { MainMod } from './main';
-
+import { ThreeJsMod } from './three-js';
 import '../styles/styles.scss';
 
 // export function createCompiler(f: CompilerFactory) {
@@ -74,6 +74,7 @@ import { DynamicCom } from './dynamic.com';
     MatButtonModule,
     CoreMod.forRoot(),
     MainMod,
+    ThreeJsMod,
     RouterModule.forRoot(INIT_ROUTES,
     {
       // enableTracing: environment... : true ? false,

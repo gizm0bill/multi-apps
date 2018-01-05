@@ -26,7 +26,7 @@
     // "directive-selector": [true, "attribute", "my", "camelCase"],
     "import-spacing": false,
     "no-attribute-parameter-decorator": true,
-    "no-forward-ref": true,
+    "no-forward-ref": false,
     "no-input-rename": true,
     "no-output-rename": true,
     "only-arrow-functions": false,

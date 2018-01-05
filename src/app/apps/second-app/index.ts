@@ -6,6 +6,7 @@ import { ROUTES } from './routes';
 import { MainCom } from './main.com';
 import { SubCom } from './sub.com';
 import { SomeSrv, RegistrySrv, AppModuleConfig, IAppModuleConfig } from '../../core';
+import { ThreeJsMod } from '../../three-js';
 import { of } from 'rxjs/observable/of';
 import { delay, map } from 'rxjs/operators';
 
@@ -23,6 +24,7 @@ export const SECOND_APP_MODULE_ACCESS: IAppModuleConfig =
   [
     CommonModule,
     MatChipsModule,
+    ThreeJsMod,
     RouterModule.forChild(ROUTES),
   ],
   providers:

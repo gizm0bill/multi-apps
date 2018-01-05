@@ -12,6 +12,7 @@ export class RegistrySrv
   get apps(): ReplaySubject<NgModuleRef<any>> { return this._apps; }
   registerApp( app: NgModuleRef<any> )
   {
+    // TODO: debugger;
     // add app's own specific link after some custom logic
     // setTimeout because app.instance calls constructor, and we are now in the constructor call actually
     setTimeout( () =>
@@ -22,7 +23,10 @@ export class RegistrySrv
 
         appRouteIdx =
           this.router.config[appsRouteIdx].children.findIndex( route =>
-            ((route as any )._loadedConfig as LoadedRouterConfig).module.instance === app.instance );
+          {
+            const cfg = ((route as any )._loadedConfig as LoadedRouterConfig);
+            return cfg && cfg.module.instance === app.instance;
+          });
 
       app.injector.get(AppModuleConfig).link = this.router.createUrlTree
       ([
