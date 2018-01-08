@@ -17,7 +17,7 @@ import { MatIconModule, MatToolbarModule, MatButtonModule } from '@angular/mater
  * Platform and Environment providers/directives/pipes
  */
 import { environment } from 'environments/environment';
-import { INIT_ROUTES } from './app.routes';
+import { RoutingMod } from './routing';
 // App is our top level component
 import { AppCom } from './app.com';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
@@ -75,12 +75,7 @@ import { DynamicCom } from './dynamic.com';
     CoreMod.forRoot(),
     MainMod,
     ThreeJsMod,
-    RouterModule.forRoot(INIT_ROUTES,
-    {
-      // enableTracing: environment... : true ? false,
-      useHash: Boolean(history.pushState) === false,
-      preloadingStrategy: PreloadAllModules
-    }),
+    RoutingMod,
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.

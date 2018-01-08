@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { DashboardCom } from './dashboard';
 import { AuthCom } from './auth';
-import { AuthGuard } from '../core';
+import { AuthGuard } from '../core/auth.grd';
 
 export const ROUTES: Routes =
 [

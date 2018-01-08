@@ -189,7 +189,8 @@ module.exports = function (options)
                 presets: ['es2015'].map(dep => require.resolve(`babel-preset-${dep}`) )
               } 
             }, 
-            { loader: 'pug-loader' } ]
+            { loader: 'pug-loader' }
+          ]
         },
 
       ],

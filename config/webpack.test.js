@@ -148,6 +148,21 @@ module.exports = function (options) {
           loader: 'raw-loader',
           exclude: [helpers.root('src/index.html')]
         },
+        { 
+          test: /\.(pug|jade)$/, // babel-loader because IE
+          use: 
+          [ 
+            { loader: 'apply-loader' },
+            { 
+              loader: 'babel-loader', 
+              options: 
+              { 
+                presets: ['es2015'].map(dep => require.resolve(`babel-preset-${dep}`) )
+              } 
+            }, 
+            { loader: 'pug-loader' }
+          ]
+        },
 
         /**
          * Instruments JS files with Istanbul for subsequent code coverage reporting.

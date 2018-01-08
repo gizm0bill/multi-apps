@@ -59,7 +59,7 @@
     "start:hmr": "yarn run server:dev:hmr",
     "start": "yarn run server:dev",
     "start:aot": "yarn run server:aot:dev",
-    "test": "yarn run lint && karma start",
+    "test": "karma start",
     "tslint": "tslint",
     "typedoc": "typedoc",
     "version": "yarn run build",
