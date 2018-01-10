@@ -1,4 +1,4 @@
-import { Directive, Input, AfterViewInit, ContentChildren, QueryList } from '@angular/core';
+import { Directive, Input, AfterViewInit, OnDestroy, ContentChildren, QueryList } from '@angular/core';
 import * as THREE from 'three';
 import { PerspectiveCameraDir } from '../camera';
 import { RendererCom } from '../renderer.com';
@@ -9,7 +9,7 @@ import 'three/examples/js/controls/OrbitControls';
 ({
   selector: 'three-orbit-contols'
 })
-export class OrbitControlsDir implements AfterViewInit
+export class OrbitControlsDir implements AfterViewInit, OnDestroy
 {
 
   @ContentChildren(PerspectiveCameraDir, { descendants: true }) childCameras: QueryList<PerspectiveCameraDir>;
@@ -40,5 +40,7 @@ export class OrbitControlsDir implements AfterViewInit
     this.controls.addEventListener('change', this.childRenderers.first.render);
     this.childRenderers.first.render();
   }
+
+  ngOnDestroy() { this.controls.dispose(); }
 
 }

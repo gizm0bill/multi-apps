@@ -13,7 +13,6 @@ export class AxesHelperDir extends AObject3D<THREE.AxisHelper> implements AfterV
 
   ngAfterViewInit()
   {
-    console.log('AxesHelperDirective.newObject3DInstance');
     this._object = new THREE.AxisHelper(this.size);
     super.ngAfterViewInit();
   }

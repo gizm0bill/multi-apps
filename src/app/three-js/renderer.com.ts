@@ -15,7 +15,7 @@ import * as THREE from 'three';
 @Component
 ({
   selector: 'three-renderer',
-  template: '<canvas #canvas></canvas>',
+  template: '<canvas #canvas width="0" height="0"></canvas>',
   styles: [ 'canvas { width: 100%; height: 100%; }' ]
 })
 export class RendererCom implements AfterViewInit
@@ -27,16 +27,16 @@ export class RendererCom implements AfterViewInit
   @ViewChild('canvas') canvasRef: ElementRef;
   get canvas(): HTMLCanvasElement { return this.canvasRef.nativeElement; }
 
-  @ContentChildren(SceneDir) sceneComponents: QueryList<SceneDir>; // TODO: Multiple scenes
-  @ContentChildren(PerspectiveCameraDir) cameraComponents: QueryList<PerspectiveCameraDir>; // TODO: Multiple cameras
+  @ContentChildren(SceneDir) sceneComponents: QueryList<SceneDir>;
+  @ContentChildren(PerspectiveCameraDir) cameraComponents: QueryList<PerspectiveCameraDir>;
 
   ngAfterViewInit()
   {
     this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: !!1, alpha: true });
     this.renderer.setPixelRatio(devicePixelRatio);
-    this.renderer.setSize(this.canvas.clientWidth, this.canvas.clientHeight);
-    this.renderer.shadowMap.enabled = true;
-    this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    this.renderer.setSize(this.canvas.clientWidth - 4, this.canvas.clientHeight - 4);
+    // this.renderer.shadowMap.enabled = true;
+    // this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.setClearColor(0xffffff, 0);
     this.renderer.autoClear = true;
     this.updateChildCamerasAspectRatio();
@@ -52,11 +52,11 @@ export class RendererCom implements AfterViewInit
 
   private calculateAspectRatio(): number
   {
-    const height = this.canvas.clientHeight;
+    const height = this.canvas.clientHeight - 4;
     if (height === 0) {
       return 0;
     }
-    return this.canvas.clientWidth / this.canvas.clientHeight;
+    return (this.canvas.clientWidth - 4) / (this.canvas.clientHeight - 4);
   }
 
   @HostListener('window:resize', ['$event'])
@@ -64,11 +64,11 @@ export class RendererCom implements AfterViewInit
   {
     this.canvas.style.width = '100%';
     this.canvas.style.height = '100%';
-    console.log('RendererComponent.onResize: ' + this.canvas.clientWidth + ', ' + this.canvas.clientHeight);
+    // console.log('RendererComponent.onResize: ' + this.canvas.clientWidth + ', ' + this.canvas.clientHeight);
 
     this.updateChildCamerasAspectRatio();
 
-    this.renderer.setSize(this.canvas.clientWidth, this.canvas.clientHeight);
+    this.renderer.setSize(this.canvas.clientWidth - 4, this.canvas.clientHeight - 4);
     this.render();
   }
 

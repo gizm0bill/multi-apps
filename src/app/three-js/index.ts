@@ -7,6 +7,7 @@ import { OrbitControlsDir } from './control';
 import { PointLightDir } from './light';
 import { ColladaLoaderDir, ObjectLoaderDir } from './loader';
 import { AxesHelperDir, GridHelperDir } from './helper';
+import { MeshDir, PlaneBufferGeometryDir } from './object';
 
 @NgModule
 ({
@@ -22,6 +23,9 @@ import { AxesHelperDir, GridHelperDir } from './helper';
     ObjectLoaderDir,
     AxesHelperDir,
     GridHelperDir,
+
+    MeshDir,
+    PlaneBufferGeometryDir
   ],
   exports:
   [
@@ -34,6 +38,9 @@ import { AxesHelperDir, GridHelperDir } from './helper';
     ObjectLoaderDir,
     AxesHelperDir,
     GridHelperDir,
+
+    MeshDir,
+    PlaneBufferGeometryDir
   ]
 })
 export class ThreeJsMod {}

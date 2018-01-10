@@ -1,0 +1,18 @@
+.mat-chip-list, #loadingAudio
+{
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  height: 100px;
+  width: 500px;
+  z-index: 1;
+}
+:host
+{
+  position: relative;
+}
+three-orbit-contols, three-renderer
+{
+  display: block;
+  height: 100%;
+}

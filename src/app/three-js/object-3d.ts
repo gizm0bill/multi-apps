@@ -3,7 +3,7 @@ import * as THREE from 'three';
 
 export abstract class AObject3D<T extends THREE.Object3D> implements AfterViewInit
 {
-  @ContentChildren(AObject3D, { descendants: false }) childNodes: QueryList<AObject3D<THREE.Object3D>>;
+  @ContentChildren(AObject3D, { descendants: false }) childNodes: QueryList<AObject3D<any>>;
 
   @Input() rotateX: number;
   @Input() rotateY: number;

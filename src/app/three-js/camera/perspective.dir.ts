@@ -27,6 +27,7 @@ export class PerspectiveCameraDir implements AfterViewInit
     this.camera.position.y = this.positionY;
     this.camera.position.z = this.positionZ;
     this.camera.updateProjectionMatrix();
+
   }
 
   updateAspectRatio(aspect: number)

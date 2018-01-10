@@ -12,6 +12,7 @@ export class SceneDir extends AObject3D<THREE.Scene> implements AfterViewInit
   ngAfterViewInit()
   {
     this._object = new THREE.Scene();
+    // window.scene = this._object;
     super.ngAfterViewInit();
   }
 }

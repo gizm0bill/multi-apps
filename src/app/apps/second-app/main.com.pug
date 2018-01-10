@@ -1,20 +1,25 @@
-mat-chip-list
-  mat-chip( i18n ) One fish 
-  mat-chip( i18n ) Two fish
-  mat-chip( color="primary", selected="true", i18n ) Primary fish
-  mat-chip( color="accent", selected="true", i18n ) Accent fish
-  mat-chip( color="warn", selected="true", routerLink="./sub", i18n ) Warning fish
+mat-chip-list( *ngIf="audioLoaded; else loadingAudio" )
+  mat-chip( (click)="audio.play()", [selected]="audio?.isPlaying" ): mat-icon play_arrow 
+  mat-chip( (click)="audio.pause()", color="primary" ): mat-icon pause
+  mat-chip( (click)="audio.stop()" ): mat-icon stop
+  mat-chip( color="warn", selected="true", routerLink="./sub" ): mat-icon forward
+ng-template( #loadingAudio )
+  span#loadingAudio( i18n ) Loading {{audioLoadedPercent}}%
 
 three-orbit-contols( [rotateSpeed]=1, [zoomSpeed]='1.2' )
   three-renderer( #mainRenderer )
-    three-perspective-camera( [fov]=60, [near]=1, [far]=1100, positionX=20, positionY=50, positionZ=50 )
+    three-perspective-camera( [fov]=60, [near]=1, [far]=1100, positionX=28 positionY=52, positionZ=120 )
     
     three-scene
       
-      three-axes-helper( size=100 )
-      three-grid-helper( size=100, divisions=10 )
+      three-axes-helper( size=64 )
+      three-grid-helper( size=128, divisions=32 )
 
-      three-point-light( color=0xff0000, intensity="1", distance="1000", translateX=50, translateY=50, translateZ=5 )
+      three-point-light( color="#ff0000", intensity="1", distance="1000", translateX=50, translateY=50, translateZ=5 )
 
-      three-collada-loader( model="assets/model/fish.dae", [renderer]="mainRenderer" )
+      three-mesh
+        three-plane-buffer-geometry( widthSegments=32, heightSegments=32 )
+        custom-shader-material( [shaderData]="analyser.data" )
+      
+      //- three-collada-loader( model="assets/model/fish.dae", [renderer]="mainRenderer" )
         three-axes-helper( size=10 )

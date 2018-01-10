@@ -11,11 +11,11 @@ export class GridHelperDir extends AObject3D<THREE.AxisHelper> implements AfterV
 {
   @Input() size: number;
   @Input() divisions: number;
+  @Input() color: THREE.Color;
 
   ngAfterViewInit()
   {
-    console.log('GridHelperDirective.newObject3DInstance');
-    this._object = new THREE.GridHelper(this.size, this.divisions);
+    this._object = new THREE.GridHelper(this.size, this.divisions, undefined, this.color || new THREE.Color(0xeeeeee));
     super.ngAfterViewInit();
   }
 }
