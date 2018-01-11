@@ -19,8 +19,8 @@ export { AuthenticationSrv, AuthoritySrv } from './auth.srv';
     // because we already load it in the environment
     // and here it's imported as undefined ¯\_(ツ)_/¯
     // tslint:disable:no-forward-ref
-    forwardRef( () => AppAuthGuard ),
-    forwardRef( () => AuthGuard ),
+    // forwardRef( () => AppAuthGuard ),
+    // forwardRef( () => AuthGuard ),
     AuthenticationSrv,
     AuthoritySrv,
     RegistrySrv,

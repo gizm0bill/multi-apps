@@ -37,7 +37,6 @@ function readTsConfig(tsConfigPath)
   return ts.parseJsonConfigFileContent(configResult.config, ts.sys,
     path.dirname(tsConfigPath), undefined, tsConfigPath);
 }
-
 function getEnvFile(suffix)
 {
   if (suffix && suffix[0] !== '.') suffix = '.' + suffix;

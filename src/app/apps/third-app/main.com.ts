@@ -2,14 +2,16 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'thrid-app-main',
-  styles: [`
-    .example-header-image {
+  styles:
+  [`.example-header-image
+    {
       background-image: url('http://fortbragglibrary.org/wp-content/uploads/2017/08/Pirate-Parrot.jpg');
       background-size: cover;
-    }
-  `],
+    }`,
+    '.example-card { width:448px; margin: 12px; }'
+  ],
   template: `
-  <mat-card style="width:448px" class="example-card">
+  <mat-card style="" class="example-card">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>Shiver me timbers</mat-card-title>

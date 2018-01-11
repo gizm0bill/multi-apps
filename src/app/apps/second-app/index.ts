@@ -11,7 +11,7 @@ import { ThreeJsMod } from '../../three-js';
 import { of } from 'rxjs/observable/of';
 import { delay, map } from 'rxjs/operators';
 
-export const SECOND_APP_MODULE_ACCESS: IAppModuleConfig =
+export const SECOND_APP_MODULE_CONFIG: IAppModuleConfig =
 {
   roles: of(['user_role_2']).pipe( delay( Math.random() * 10000 / 9) ),
   weight: 2,
@@ -32,7 +32,7 @@ export const SECOND_APP_MODULE_ACCESS: IAppModuleConfig =
   providers:
   [
     SomeSrv,
-    { provide: AppModuleConfig, useValue: SECOND_APP_MODULE_ACCESS }
+    { provide: AppModuleConfig, useValue: SECOND_APP_MODULE_CONFIG }
   ]
 })
 export class SecondAppMod

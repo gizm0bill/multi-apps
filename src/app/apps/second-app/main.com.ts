@@ -41,11 +41,16 @@ export class MainCom implements OnDestroy, AfterViewInit
     this.analyser = new THREE.AudioAnalyser( this.audio, 2048 );
   }
 
-  ngOnDestroy() { clearInterval(this.refreshInterval); }
+  ngOnDestroy()
+  {
+    clearInterval(this.refreshInterval);
+    if ( this.audio && this.audio.isPlaying ) this.audio.stop();
+  }
 
   ngAfterViewInit()
   {
     const renderer = this.childRenderers.first;
+    setTimeout( renderer.onResize.bind(renderer), 500 ); // TODO: animation end from unloaded component
     this.zone.runOutsideAngular( () =>
       this.refreshInterval = setInterval( () =>
       {

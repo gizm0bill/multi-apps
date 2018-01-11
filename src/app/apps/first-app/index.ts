@@ -8,7 +8,7 @@ import { ROUTES } from './routes';
 import { MainCom } from './main.com';
 import { SomeSrv, RegistrySrv, AppModuleConfig, IAppModuleConfig } from '../../core';
 
-export const FIRST_APP_MODULE_ACCESS: IAppModuleConfig =
+export const FIRST_APP_MODULE_CONFIG: IAppModuleConfig =
 {
   // simulate latency
   roles: of(['user_role_1']).pipe( delay( Math.random() * 10000 / 9) ),
@@ -29,7 +29,7 @@ export const FIRST_APP_MODULE_ACCESS: IAppModuleConfig =
   providers:
   [
     SomeSrv,
-    { provide: AppModuleConfig, useValue: FIRST_APP_MODULE_ACCESS }
+    { provide: AppModuleConfig, useValue: FIRST_APP_MODULE_CONFIG }
   ]
 })
 export class FirstAppMod

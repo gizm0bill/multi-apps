@@ -35,7 +35,8 @@ module.exports = function (options) {
      *
      * See: http://webpack.github.io/docs/configuration.html#resolve
      */
-    resolve: {
+    resolve:
+    {
 
       /**
        * An array of extensions that should be used to resolve modules.
@@ -59,10 +60,10 @@ module.exports = function (options) {
      * 'use:' revered back to 'loader:' as a temp. workaround for #1188
      * See: https://github.com/AngularClass/angular-starter/issues/1188#issuecomment-262872034
      */
-    module: {
-
-      rules: [
-
+    module: 
+    {
+      rules:
+      [
         /**
          * Source map loader support for *.js files
          * Extracts SourceMaps for source files that as added as sourceMappingURL comment.
@@ -73,7 +74,8 @@ module.exports = function (options) {
           enforce: 'pre',
           test: /\.js$/,
           loader: 'source-map-loader',
-          exclude: [
+          exclude:
+          [
             /**
              * These packages have problems with their sourcemaps
              */

@@ -1,54 +1,51 @@
-var sourceMappingURL = require('source-map-url')
+const webpack = require('webpack');
+const basename = require('path').basename;
+const AsyncDependenciesBlock = require('webpack/lib/AsyncDependenciesBlock');
+const ContextElementDependency = require('webpack/lib/dependencies/ContextElementDependency');
+const ImportDependency = require('webpack/lib/dependencies/ImportDependency');
 
-function TestPlugin (options) {
-    this.options = extend({
-        // from options
-        apps: [
-          { second: './apps/second-app#SecondAppMod' },
-          { first: './apps/first-app#FirstAppMod' }
-        ]
-    }, options || {})
-}
-
-TestPlugin.prototype.apply = function (compiler) {
-    var me = this
-
-    compiler.plugin('make', function(compilation) {
-        compilation._remapChunksPluginInstance = me;
-    });
-    // compiler.plugin('compilation', function (compilation) {
-    //     compilation.plugin("after-optimize-chunks", function (chunks) {
-
-    //         chunks.forEach( (chunk, idx) =>
-    //         {
-    //           // TODO: worth to investigate what is up with modules
-    //           // now, with this logic, it gets common chunk as well
-    //           if ( chunk.blocks.length && chunk.blocks.every( block => me.options.asyncBlocks.indexOf(block.loc) !== -1 ) )
-    //           {
-    //             // TODO: replace with some deplay server mapping logic from options
-    //             const id = Math.random();
-    //             chunk.name = id;
-    //             chunk.id = 'http://localhost:3000/wtv/' + id;
-    //           }  
-    //         });
-    //     })
-    // })
-}
-
-function extend (base) {
-    var i = 1
-    var len = arguments.length
-
-    for (; i < len; i++) {
-        var obj = arguments[i]
-        for (var key in obj) {
-            if (obj.hasOwnProperty(key)) {
-                base[key] = obj[key]
-            }
-        }
+class RemapChunksWebpackPlugin extends webpack.NamedChunksPlugin
+{
+  constructor(config)
+  {
+    let options = { processFn: () => void 0 };
+    if ( typeof config === 'function' ) options.processFn = config;
+    
+    // Append a dot and number if the name already exists.
+    const nameMap = new Map();
+    const getUniqueName = (baseName) =>
+    {
+      let name = baseName, num = 0;
+      while ( nameMap.has(name) ) name = `${baseName}.${num++}`;
+      nameMap.set(name, true);
+      return name;
     }
 
-    return base
+    const nameResolver = (chunk) =>
+    {
+      // entry chunks
+      if ( chunk.name ) return chunk.name;
+      if // try to figure out if it's a lazy loaded route or import
+      (
+        chunk.blocks
+        && chunk.blocks.length > 0
+        && chunk.blocks[0] instanceof AsyncDependenciesBlock
+        && chunk.blocks[0].dependencies.length === 1
+        && (chunk.blocks[0].dependencies[0] instanceof ContextElementDependency
+          || chunk.blocks[0].dependencies[0] instanceof ImportDependency)
+      )
+      {
+        const
+          req = chunk.blocks[0].dependencies[0].request,
+          baseName = options.processFn(req);
+        if ( !baseName ) return chunk.id;
+        return getUniqueName(baseName);
+      }
+      return null;
+    };
+
+    super(nameResolver);
+  }
 }
 
-module.exports = TestPlugin
+module.exports = RemapChunksWebpackPlugin;

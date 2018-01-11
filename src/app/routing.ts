@@ -3,7 +3,7 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { NotFoundCom } from './404.com';
 
 // import directly from its path because NgModule/barels mess
-import { AuthGuard } from './core/auth.grd';
+import { AuthGuard, AppAuthGuard } from './core/auth.grd';
 import { environment } from 'environments/environment';
 
 export const INIT_ROUTES: Routes =
@@ -22,13 +22,15 @@ export const INIT_ROUTES: Routes =
 ({
   imports:
   [
-    RouterModule.forRoot(INIT_ROUTES, {
+    RouterModule.forRoot( INIT_ROUTES,
+    {
       // enableTracing: environment... : true ? false,
       useHash: Boolean(history.pushState) === false,
       preloadingStrategy: PreloadAllModules
     })
   ],
   exports: [ RouterModule ],
+  providers: [ AuthGuard, AppAuthGuard ]
 })
 export class RoutingMod {}
 

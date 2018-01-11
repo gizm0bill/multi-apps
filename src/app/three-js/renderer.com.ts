@@ -34,13 +34,11 @@ export class RendererCom implements AfterViewInit
   {
     this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: !!1, alpha: true });
     this.renderer.setPixelRatio(devicePixelRatio);
-    this.renderer.setSize(this.canvas.clientWidth - 4, this.canvas.clientHeight - 4);
     // this.renderer.shadowMap.enabled = true;
     // this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.setClearColor(0xffffff, 0);
     this.renderer.autoClear = true;
-    this.updateChildCamerasAspectRatio();
-    this.render();
+    this.onResize(new Event('_dummy_'));
   }
 
   render()

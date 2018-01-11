@@ -8,7 +8,7 @@ import { RegistrySrv, AppModuleConfig, IAppModuleConfig } from '../../core';
 import { of } from 'rxjs/observable/of';
 import { delay, map } from 'rxjs/operators';
 
-export const THIRD_APP_MODULE_ACCESS: IAppModuleConfig =
+export const THIRD_APP_MODULE_CONFIG: IAppModuleConfig =
 {
   roles: of(['user_role_1', 'user_role_2']).pipe( delay( Math.random() * 10000 / 9) ),
   weight: 3,
@@ -25,10 +25,7 @@ export const THIRD_APP_MODULE_ACCESS: IAppModuleConfig =
     MatButtonModule,
     RouterModule.forChild(ROUTES),
   ],
-  providers:
-  [
-    { provide: AppModuleConfig, useValue: THIRD_APP_MODULE_ACCESS }
-  ]
+  providers: [ { provide: AppModuleConfig, useValue: THIRD_APP_MODULE_CONFIG } ]
 })
 export class ThirdAppMod
 {

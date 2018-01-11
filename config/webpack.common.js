@@ -1,5 +1,3 @@
-const helpers = require('./helpers');
-
 /**
  * Webpack Plugins
  *
@@ -9,7 +7,7 @@ const DefinePlugin = require('webpack/lib/DefinePlugin');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlElementsPlugin = require('./html-elements-plugin');
-const TestPlugin = require('./remap-chunks-plugin');
+const RemapChunksWebpackPlugin = require('./remap-chunks-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
@@ -17,7 +15,9 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const ngcWebpack = require('ngc-webpack');
 const ngTools = require('@ngtools/webpack');
 const buildUtils = require('./build-utils');
+const helpers = require('./helpers');
 const glob = require('glob');
+const path = require('path');
 
 /**
  * Webpack configuration
@@ -326,7 +326,12 @@ module.exports = function (options)
         headTags: require('./head-config.common')
       }),
 
-      // new TestPlugin(),
+      new RemapChunksWebpackPlugin((req) => 
+      {
+        const match = req.match( new RegExp( helpers.root('src', 'app', 'apps', '(.*?)') + path.sep ) );
+        if ( !match ) return false;
+        return match[1];
+      }),
       /**
        * Plugin LoaderOptionsPlugin (experimental)
        *

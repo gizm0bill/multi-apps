@@ -54,7 +54,7 @@ export class AppAuthGuard implements CanActivate, CanLoad
         .roles.pipe( switchMap( this._can.bind(this) ) );
 
     // or check hardcodded config from router data
-    if ( route.data.authorities) return this._can( route.data.authorities );
+    if ( route.data && route.data.authorities) return this._can( route.data.authorities );
 
     return false;
   }

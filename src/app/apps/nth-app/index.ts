@@ -8,7 +8,7 @@ import { RegistrySrv, AppModuleConfig, IAppModuleConfig } from '../../core';
 import { of } from 'rxjs/observable/of';
 import { delay } from 'rxjs/operators';
 
-export const NTH_APP_MODULE_ACCESS: IAppModuleConfig =
+export const NTH_APP_MODULE_CONFIG: IAppModuleConfig =
 {
   roles: of([]).pipe( delay( Math.random() * 10000 / 9) ),
   weight: 1,
@@ -27,10 +27,7 @@ export const NTH_APP_MODULE_ACCESS: IAppModuleConfig =
     MatIconModule,
     RouterModule.forChild(ROUTES),
   ],
-  providers:
-  [
-    { provide: AppModuleConfig, useValue: NTH_APP_MODULE_ACCESS }
-  ]
+  providers: [ { provide: AppModuleConfig, useValue: NTH_APP_MODULE_CONFIG } ]
 })
 export class NthAppMod
 {

@@ -3,10 +3,12 @@ import { SomeSrv } from '../../core';
 import { Element } from '../../core/some.srv'
 import { MatTableDataSource } from '@angular/material';
 
-@Component({
+@Component
+({
+  styles: ['.example { margin: 12px } '],
   selector: 'first-app-main',
   template: `
-  <div class="example-container mat-elevation-z8">
+  <div class="example mat-elevation-z8">
     <mat-table #table [dataSource]="dataSource">
 
       <!-- Position Column -->
