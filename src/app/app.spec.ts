@@ -35,9 +35,9 @@ describe('App', () =>
     })
     .compileComponents();
   }));
-  
-  it( 'should have `apps` routes', fakeAsync( inject( [Router], (router: Router) =>
-    expect( router.config.find( route => route.data && route.data.appsPlaceholder ).children.length ).toBeGreaterThan(0)
+
+  it( 'should have `apps` routes', fakeAsync( inject( [Router], (r: Router) =>
+    expect( r.config.find( route => route.data && route.data.appsPlaceholder ).children.length ).toBeGreaterThan(0)
   )));
 
   it('should navigate to login immediately', fakeAsync(() => {

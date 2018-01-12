@@ -39,7 +39,7 @@ export const environment: Environment =
   },
   {
     path: 'first',
-    loadChildren: './apps/first-app#FirstAppMod',
+    loadChildren: './apps/first-app-load-guard#FirstAppLoadGuardMod',
     canActivate: [ AppAuthGuard ],
     data: { authorities: ['user_role_1'] }
   },
