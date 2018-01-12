@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { NgModule, NgModuleRef } from '@angular/core';
 import { MatTableModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
@@ -7,6 +6,7 @@ import { delay, map } from 'rxjs/operators';
 import { ROUTES } from './routes';
 import { MainCom } from './main.com';
 import { SomeSrv, RegistrySrv, AppModuleConfig, IAppModuleConfig } from '../../core';
+import { SharedMod } from '../../shared';
 
 export const FIRST_APP_MODULE_CONFIG: IAppModuleConfig =
 {
@@ -22,7 +22,7 @@ export const FIRST_APP_MODULE_CONFIG: IAppModuleConfig =
   entryComponents: [ MainCom ],
   imports:
   [
-    CommonModule,
+    SharedMod,
     MatTableModule,
     RouterModule.forChild(ROUTES),
   ],

@@ -47,5 +47,5 @@ exports.config = {
    */
    useAllAngular2AppRoots: true,
 
-   SELENIUM_PROMISE_MANAGER: false,
+   SELENIUM_PROMISE_MANAGER: true,
 };

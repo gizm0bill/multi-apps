@@ -19,7 +19,6 @@ export class ColladaLoaderDir extends AObject3D<THREE.Object3D> implements After
 
   ngAfterViewInit(): void
   {
-    console.log('ColladaLoaderDirective.afterInit');
     this._object = new THREE.Object3D;
     this.loader.load(this.model, this.onModelLoadingCompleted.bind(this));
     super.ngAfterViewInit();

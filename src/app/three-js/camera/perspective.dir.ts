@@ -32,7 +32,6 @@ export class PerspectiveCameraDir implements AfterViewInit
 
   updateAspectRatio(aspect: number)
   {
-    // console.log("PerspectiveCameraDirective.updateAspectRatio: " + aspect);
     this.camera.aspect = aspect;
     this.camera.updateProjectionMatrix();
   }

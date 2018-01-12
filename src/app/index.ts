@@ -46,7 +46,7 @@ interface StoreType
   disposeOldHosts: () => void;
 }
 
-// import { DynamicCom } from './dynamic.com';
+import { DynamicCom } from './dynamic.com';
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
@@ -58,7 +58,7 @@ interface StoreType
   [
     AppCom,
     NotFoundCom,
-    // DynamicCom,
+    DynamicCom,
   ],
   /**
    * Import Angular's modules.

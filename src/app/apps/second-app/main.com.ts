@@ -1,7 +1,7 @@
-import { Component, OnDestroy, AfterViewInit, NgZone, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnDestroy, AfterViewInit, NgZone, ViewChild } from '@angular/core';
 import * as THREE from 'three';
 import { RendererCom } from '../../three-js/renderer.com';
-import { SceneDir } from '../../three-js/scene.dir';
+import { PerspectiveCameraDir } from '../../three-js/camera';
 
 @Component
 ({
@@ -11,7 +11,7 @@ import { SceneDir } from '../../three-js/scene.dir';
 })
 export class MainCom implements OnDestroy, AfterViewInit
 {
-  @ViewChildren(RendererCom) childRenderers: QueryList<RendererCom>;
+  @ViewChild(RendererCom) childRenderer: RendererCom;
 
   audio: THREE.Audio;
   audioLoaded: boolean = false;
@@ -49,7 +49,7 @@ export class MainCom implements OnDestroy, AfterViewInit
 
   ngAfterViewInit()
   {
-    const renderer = this.childRenderers.first;
+    const renderer = this.childRenderer;
     setTimeout( renderer.onResize.bind(renderer), 500 ); // TODO: animation end from unloaded component
     this.zone.runOutsideAngular( () =>
       this.refreshInterval = setInterval( () =>

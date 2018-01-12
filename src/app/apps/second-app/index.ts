@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { NgModule, NgModuleRef } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MatChipsModule, MatIconModule } from '@angular/material';
@@ -8,6 +7,7 @@ import { SubCom } from './sub.com';
 import { CustomShaderMaterialDir } from './custom-shader.dir';
 import { SomeSrv, RegistrySrv, AppModuleConfig, IAppModuleConfig } from '../../core';
 import { ThreeJsMod } from '../../three-js';
+import { SharedMod } from '../../shared';
 import { of } from 'rxjs/observable/of';
 import { delay, map } from 'rxjs/operators';
 
@@ -23,7 +23,7 @@ export const SECOND_APP_MODULE_CONFIG: IAppModuleConfig =
   declarations: [ MainCom, SubCom, CustomShaderMaterialDir ],
   imports:
   [
-    CommonModule,
+    SharedMod,
     MatChipsModule,
     MatIconModule,
     ThreeJsMod,
