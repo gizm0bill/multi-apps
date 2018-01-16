@@ -1,7 +1,7 @@
 // tslint:disable:max-line-length
 import { NgModule, NgModuleRef, Injectable, Inject } from '@angular/core';
 import { MatTableModule } from '@angular/material';
-import { RouterModule, CanLoad } from '@angular/router';
+import { RouterModule, CanLoad, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { of } from 'rxjs/observable/of';
 import { delay, map, switchMap } from 'rxjs/operators';
 import { RegistrySrv, AuthoritySrv, AppModuleConfig, IAppModuleConfig } from '../../core';
@@ -35,7 +35,7 @@ export class FirstAppLoadGuard implements CanLoad
 ({
   imports:
   [
-    RouterModule.forChild([ { path: '', loadChildren: '../first-app#FirstAppMod', canLoad: [ FirstAppLoadGuard ] } ]),
+    RouterModule.forChild( [ { path: '', loadChildren: '../first-app#FirstAppMod', canLoad: [ FirstAppLoadGuard ] } ] ),
   ],
   providers: [ { provide: AppModuleConfig, useValue: FIRST_APP_MODULE_CONFIG }, FirstAppLoadGuard ]
 })

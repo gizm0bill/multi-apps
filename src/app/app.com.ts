@@ -4,6 +4,7 @@ import { environment } from 'environments/environment';
 import { AppState } from './app.state';
 import { AuthenticationSrv } from './core/auth.srv';
 import { Observable } from 'rxjs/Observable';
+import { MenuSrv } from './core/menu.srv';
 /**
  * App Component
  * Top Level Component
@@ -15,14 +16,15 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: [ './app.com.scss' ],
   templateUrl: './app.com.pug'
 })
-export class AppCom implements OnInit {
-
+export class AppCom implements OnInit
+{
   loggedIn: Observable<any>;
   constructor
   (
     public appState: AppState,
     private authSrv: AuthenticationSrv,
-    private router: Router
+    private router: Router,
+    public menu: MenuSrv
   ) {}
 
   ngOnInit()

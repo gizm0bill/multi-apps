@@ -24,7 +24,7 @@ export const INIT_ROUTES: Routes =
   [
     RouterModule.forRoot( INIT_ROUTES,
     {
-      // enableTracing: environment... : true ? false,
+      enableTracing: (!environment.production ? true : false),
       useHash: Boolean(history.pushState) === false,
       preloadingStrategy: PreloadAllModules
     })

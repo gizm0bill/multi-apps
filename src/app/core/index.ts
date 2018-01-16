@@ -6,6 +6,7 @@ import { RegistrySrv } from './registry.srv';
 import { SomeSrv } from './some.srv';
 import { Observable } from 'rxjs/Observable';
 // exports
+import { MenuSrv } from './menu.srv';
 export { RegistrySrv } from './registry.srv';
 export { SomeSrv } from './some.srv';
 export { AppAuthGuard, AuthGuard } from './auth.grd';
@@ -16,15 +17,11 @@ export { AuthenticationSrv, AuthoritySrv } from './auth.srv';
   imports: [ CommonModule ],
   providers:
   [
-    // because we already load it in the environment
-    // and here it's imported as undefined ¯\_(ツ)_/¯
-    // tslint:disable:no-forward-ref
-    // forwardRef( () => AppAuthGuard ),
-    // forwardRef( () => AuthGuard ),
     AuthenticationSrv,
     AuthoritySrv,
     RegistrySrv,
     SomeSrv,
+    MenuSrv
   ]
 })
 export class CoreMod

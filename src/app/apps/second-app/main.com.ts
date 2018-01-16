@@ -27,7 +27,7 @@ export class MainCom implements OnDestroy, AfterViewInit
     this.zone.runOutsideAngular( () =>
     {
       const loader = new THREE.AudioLoader;
-      loader.load('assets/audio/space-cowboy.mp3',
+      loader.load('assets/audio/bunker.mp3',
         buffer => this.zone.run( () =>
         {
           this.audioLoaded = true;

@@ -25,6 +25,7 @@ import { AppState, InternalStateType } from './app.state';
 import { NotFoundCom } from './404.com';
 import { CoreMod } from './core';
 import { MainMod } from './main';
+import { SharedMod } from './shared';
 import { ThreeJsMod } from './three-js';
 import '../styles/styles.scss';
 
@@ -74,6 +75,7 @@ import { DynamicCom } from './dynamic.com';
     MatButtonModule,
     CoreMod.forRoot(),
     MainMod,
+    SharedMod,
     ThreeJsMod,
     RoutingMod,
   ],

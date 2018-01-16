@@ -8,7 +8,7 @@ import { MatTableDataSource } from '@angular/material';
   styles: ['.example { margin: 12px } '],
   selector: 'first-app-main',
   template: `
-  <div class="example mat-elevation-z8">
+  <div class="example mat-elevation-z14">
     <mat-table #table [dataSource]="dataSource">
 
       <!-- Position Column -->
@@ -38,12 +38,12 @@ import { MatTableDataSource } from '@angular/material';
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
-  </div>`,
+  </div>`
 })
 
-export class MainCom
+export class SubCom
 {
-  displayedColumns = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns = ['name', 'symbol'];
   dataSource: MatTableDataSource<Element>;
   constructor(private someSrv: SomeSrv)
   {

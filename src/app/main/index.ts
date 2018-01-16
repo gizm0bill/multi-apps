@@ -22,6 +22,6 @@ import { ROUTES } from './routes';
     MatGridListModule,
     HttpClientModule,
     RouterModule.forChild(ROUTES)
-  ]
+  ],
 })
 export class MainMod {}

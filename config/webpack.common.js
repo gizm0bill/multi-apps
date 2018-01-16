@@ -325,7 +325,6 @@ module.exports = function (options)
       new HtmlElementsPlugin({
         headTags: require('./head-config.common')
       }),
-
       new RemapChunksWebpackPlugin((req) => 
       {
         const match = req.match( new RegExp( helpers.root('src', 'app', 'apps', '(.*?)') + path.sep ) );
