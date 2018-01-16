@@ -50,11 +50,16 @@ export const environment: Environment =
     canActivate: [ AppAuthGuard ],
     // data: { authorities: ['user_role_1', 'user_role_2'] }
   },
+  // {
+  //   path: 'nth',
+  //   loadChildren: './apps/nth-app#NthAppMod',
+  //   canActivate: [ AppAuthGuard ],
+  //   // data: { authorities: ['user_role_2'] }
+  // },
   {
-    path: 'nth',
-    loadChildren: './apps/nth-app#NthAppMod',
-    canActivate: [ AppAuthGuard ],
-    // data: { authorities: ['user_role_2'] }
+    path: 'react',
+    loadChildren: './apps/react-app#ReactAppMod',
+    canActivate: [ AppAuthGuard ]
   }]
 };
 

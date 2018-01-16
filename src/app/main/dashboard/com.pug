@@ -14,6 +14,7 @@ mat-grid-list( [cols]="maxGridWidth", rowHeight="200px", [gutterSize]="8" )
     [routerLink]="app?.link",
     [@flyIn]="'in'" )
     .app
-      mat-icon {{app?.icon}}
+      mat-icon( *ngIf="isSvg(app?.icon)", svgIcon="{{app?.icon.split('.')[0]}}" )
+      mat-icon( *ngIf="!isSvg(app?.icon)" ) {{app?.icon}}
       h4 {{(app?.name|async)||'...'}}
       p 🔑 &nbsp; {{app?.roles?.join(', ')||'any'}}

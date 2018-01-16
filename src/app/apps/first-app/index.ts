@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { MatTableModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
-import { of } from 'rxjs/observable/of';
-import { delay, map } from 'rxjs/operators';
 import { ROUTES } from './routes';
 import { MainCom } from './main.com';
 import { SomeSrv } from '../../core';

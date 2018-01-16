@@ -1,9 +1,4 @@
 // tslint:disable:max-line-length
-/**
- * TODO: https://github.com/webpack/webpack/blob/master/lib/NormalModuleReplacementPlugin.js
- * TODO: https://github.com/angular/angular-cli/blob/master/packages/%40ngtools/webpack/src/angular_compiler_plugin.ts#L530
- */
-
 import { NgModule, NgModuleRef, Injectable, Inject } from '@angular/core';
 import { MatTableModule } from '@angular/material';
 import { RouterModule, CanLoad } from '@angular/router';
@@ -21,7 +16,7 @@ export const FIRST_APP_MODULE_CONFIG: IAppModuleConfig =
 };
 
 @Injectable()
-export class TestGuard implements CanLoad
+export class FirstAppLoadGuard implements CanLoad
 {
   constructor
   (
@@ -40,16 +35,9 @@ export class TestGuard implements CanLoad
 ({
   imports:
   [
-    RouterModule.forChild
-    (
-      [{
-        path: '',
-        loadChildren: '../first-app#FirstAppMod',
-        canLoad: [ TestGuard ]
-      }]
-    ),
+    RouterModule.forChild([ { path: '', loadChildren: '../first-app#FirstAppMod', canLoad: [ FirstAppLoadGuard ] } ]),
   ],
-  providers: [ { provide: AppModuleConfig, useValue: FIRST_APP_MODULE_CONFIG }, TestGuard ]
+  providers: [ { provide: AppModuleConfig, useValue: FIRST_APP_MODULE_CONFIG }, FirstAppLoadGuard ]
 })
 export class FirstAppLoadGuardMod
 {

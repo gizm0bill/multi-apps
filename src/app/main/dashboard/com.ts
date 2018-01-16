@@ -72,4 +72,6 @@ export class DashboardCom implements OnInit
       })
     ).subscribe();
   }
+
+  isSvg(icon) { return icon && icon.split('.')[1] === 'svg' }
 }
