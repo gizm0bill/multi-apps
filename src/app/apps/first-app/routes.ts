@@ -4,7 +4,6 @@ import { MainCom } from './main.com';
 import { MenuCom } from './menu.com';
 import { SubCom } from './sub.com';
 import { MenuSrv } from '../../core/menu.srv';
-import {  } from '@angular/router/src/interfaces';
 
 @Injectable()
 export class FirstAppResolve implements Resolve<any>

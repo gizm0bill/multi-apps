@@ -3,23 +3,23 @@ import 'tslib';
 
 describe('App', () => {
 
-  beforeEach(async () =>
+  beforeAll(async () =>
   {
     await browser.get('/');
   });
 
-  it('should have a title', async () => {
-    const subject = await browser.getTitle();
-    const result  = '💫';
-    debugger;
-    expect(subject).toEqual(result);
+  it('should display login page', async () =>
+  {
+    const subject = await element(by.css('.logins')).isPresent();
+    expect(subject).toEqual(true);
   });
 
-  it('should have header', async () => {
-    const subject = await element(by.css('h1')).isPresent();
+  it('should login with a specific role', async () =>
+  {
+    await element( by.css('#login-both') ).click();
+    const h1 = await element( by.css('h1') ).isPresent();
     debugger;
-    const result  = true;
-    expect(subject).toEqual(result);
+    expect(h1).toBeTruthy();
   });
 
 });

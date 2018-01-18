@@ -1,20 +1,20 @@
 
 .logins
-  button( mat-raised-button, (click)="authSrv.login(); goHome()" )
+  button#login-none( mat-raised-button, (click)="authSrv.login(); goHome()" )
     mat-icon lock_open
     | login as #[em none]
     
-  button( mat-raised-button, (click)="authSrv.login('user_role_1'); goHome()" )
+  button#login-user1( mat-raised-button, (click)="authSrv.login('user_role_1'); goHome()" )
     mat-icon lock_open
     | 
     | login as #[strong auth 1]
 
-  button( mat-raised-button, (click)="authSrv.login('user_role_2'); goHome()" )
+  button#login-user2( mat-raised-button, (click)="authSrv.login('user_role_2'); goHome()" )
     mat-icon lock_open
     | 
     | login as #[strong auth 2]
 
-  button( mat-raised-button, (click)="authSrv.login('user_role_1', 'user_role_2'); goHome()" )
+  button#login-both( mat-raised-button, (click)="authSrv.login('user_role_1', 'user_role_2'); goHome()" )
     mat-icon lock_open
     | 
     | login as #[em both]
