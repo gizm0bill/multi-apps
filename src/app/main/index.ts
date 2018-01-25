@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule} from '@angular/common';
+import { SharedMod } from '../shared';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule, MatIconModule, MatGridListModule } from '@angular/material';
@@ -16,7 +16,7 @@ import { ROUTES } from './routes';
   ],
   imports:
   [
-    CommonModule,
+    SharedMod,
     MatButtonModule,
     MatIconModule,
     MatGridListModule,

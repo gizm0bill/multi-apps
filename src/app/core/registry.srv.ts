@@ -15,6 +15,7 @@ export class RegistrySrv
     // TODO: debugger;
     // add app's own specific link after some custom logic
     // setTimeout because app.instance calls constructor, and we are now in the constructor call actually
+    // TODO: not a good stragtegy, do something with observables, also see dashboard
     setTimeout( () =>
     {
       const
@@ -27,13 +28,12 @@ export class RegistrySrv
             const cfg = ((route as any )._loadedConfig as LoadedRouterConfig);
             return cfg && cfg.module.instance === app.instance;
           });
-
       app.injector.get(AppModuleConfig).link = this.router.createUrlTree
       ([
         this.router.config[appsRouteIdx].path,
         this.router.config[appsRouteIdx].children[appRouteIdx].path
       ]).toString();
+      this.apps.next(app);
     });
-    this.apps.next(app);
   }
 }

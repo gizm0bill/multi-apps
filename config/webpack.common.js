@@ -18,6 +18,7 @@ const buildUtils = require('./build-utils');
 const helpers = require('./helpers');
 const glob = require('glob');
 const path = require('path');
+const fs = require('fs');
 
 /**
  * Webpack configuration
@@ -85,10 +86,16 @@ module.exports = function (options)
       /**
        * An array of directory names to be resolved to the current directory
        */
-      modules: [helpers.root('src'), helpers.root('node_modules')],
+      modules:
+      [
+        helpers.root('src'),
+        helpers.root('node_modules'),
+        // support for specific app packages
+        ...fs.readdirSync( helpers.root('src/app/apps') ).map( app => helpers.root('src/app/apps/'+app+'/node_modules' ) )
+      ],
 
       /**
-       * Add support for lettable operators.
+       * Add support for pipeable operators.
        *
        * For existing codebase a refactor is required.
        * All rxjs operator imports (e.g. `import 'rxjs/add/operator/map'` or `import { map } from `rxjs/operator/map'`
@@ -155,7 +162,7 @@ module.exports = function (options)
         {
           test: /\.(html|svg)$/,
           use: 'raw-loader',
-          exclude: [helpers.root('src/index.html')]
+          exclude: [helpers.root('src/index.html'), helpers.root('node_modules')] // can be node_modules/font-awesome... for excluding font-awesome.scss, in conflict below
         },
 
         /**
@@ -169,7 +176,7 @@ module.exports = function (options)
         /* File loader for supporting fonts, for example, in CSS files.
         */
         {
-          test: /\.(eot|woff2?|ttf)([\?]?.*)$/,
+          test: /\.(eot|woff2?|ttf|otf|svg)([\?]?.*)$/,
           use: 'file-loader'
         },
 
@@ -202,7 +209,8 @@ module.exports = function (options)
      *
      * See: http://webpack.github.io/docs/configuration.html#plugins
      */
-    plugins: [
+    plugins:
+    [
       /**
        * Plugin: DefinePlugin
        * Description: Define free variables.
@@ -230,16 +238,19 @@ module.exports = function (options)
        * See: https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
        * See: https://github.com/webpack/docs/wiki/optimization#multi-page-app
        */
-      new CommonsChunkPlugin({
+      new CommonsChunkPlugin
+      ({
         name: 'polyfills',
         chunks: ['polyfills']
       }),
 
-      new CommonsChunkPlugin({
+      new CommonsChunkPlugin
+      ({
         minChunks: Infinity,
         name: 'inline'
       }),
-      new CommonsChunkPlugin({
+      new CommonsChunkPlugin
+      ({
         name: 'main',
         async: 'common',
         children: true,
@@ -254,10 +265,15 @@ module.exports = function (options)
        *
        * See: https://www.npmjs.com/package/copy-webpack-plugin
        */
-      new CopyWebpackPlugin([
-        { from: 'src/assets', to: 'assets' },
-        { from: 'src/meta'}
-      ],
+      new CopyWebpackPlugin
+      (
+        [
+          { from: 'src/assets', to: 'assets' },
+          ...fs.readdirSync( helpers.root('src/app/apps') )
+            .filter( app => fs.existsSync(helpers.root(`src/app/apps/${app}/assets`))  ) 
+            .map( app => ({ from: `src/app/apps/${app}/assets`, to: `assets/apps/${app}` }) ),
+          { from: 'src/meta'}
+        ],
         isProd ? { ignore: [ 'mock-data/**/*' ] } : undefined
       ),
 
