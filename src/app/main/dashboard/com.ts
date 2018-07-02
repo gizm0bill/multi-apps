@@ -1,9 +1,8 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
 import { trigger, state, transition, keyframes, animate, style } from '@angular/animations';
-import { defer }  from 'rxjs/observable/defer';
-import { of }     from 'rxjs/observable/of';
 import { delay, take, map, switchMap, flatMap }  from 'rxjs/operators';
+import { defer, of } from 'rxjs';
 import { RegistrySrv, AppModuleConfig, AuthenticationSrv, AuthoritySrv } from '../../core';
 
 @Component
@@ -50,8 +49,8 @@ export class DashboardCom implements OnInit
     this.auth.account.pipe
     (
       take(1),
-      map( account => account.authorities ),
-      switchMap( authorities =>
+      map( (account: any) => account.authorities ),
+      switchMap( (authorities: any[]) =>
       {
         return this.reg.apps.pipe
         (

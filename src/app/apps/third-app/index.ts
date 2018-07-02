@@ -5,7 +5,7 @@ import { MatCardModule, MatButtonModule } from '@angular/material';
 import { ROUTES } from './routes';
 import { MainCom } from './main.com';
 import { RegistrySrv, AppModuleConfig, IAppModuleConfig } from '../../core';
-import { of } from 'rxjs/observable/of';
+import { of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 
 export const THIRD_APP_MODULE_CONFIG: IAppModuleConfig =

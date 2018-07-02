@@ -33,6 +33,8 @@ module.exports = function (options)
 
   return webpackMerge(commonConfig({ env: ENV, metadata: METADATA  }),
   {
+    mode: 'development',
+    devtool: 'inline-source-map',
     /**
      * Options affecting the output of the compilation.
      *
@@ -75,9 +77,10 @@ module.exports = function (options)
       libraryTarget: 'var',
     },
 
-    module: {
-
-      rules: [
+    module:
+    {
+      rules:
+      [
 
         /**
          * Css loader support for *.css files (styles directory only)
@@ -103,7 +106,8 @@ module.exports = function (options)
       ]
     },
 
-    plugins: [
+    plugins:
+    [
       new EvalSourceMapDevToolPlugin({
         moduleFilenameTemplate: '[resource-path]',
         sourceRoot: 'webpack:///'

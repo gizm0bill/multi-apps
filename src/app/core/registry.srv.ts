@@ -1,5 +1,5 @@
 import { Injectable, NgModuleRef } from '@angular/core';
-import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { ReplaySubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { AppModuleConfig } from './';
 import { LoadedRouterConfig } from '@angular/router/src/config';
@@ -15,7 +15,7 @@ export class RegistrySrv
     // TODO: debugger;
     // add app's own specific link after some custom logic
     // setTimeout because app.instance calls constructor, and we are now in the constructor call actually
-    // TODO: not a good stragtegy, do something with observables, also see dashboard
+    // TODO: not a good strategy, do something with observables, also see dashboard
     setTimeout( () =>
     {
       const

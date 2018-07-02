@@ -25,18 +25,27 @@ class RemapChunksWebpackPlugin extends webpack.NamedChunksPlugin
     {
       // entry chunks
       if ( chunk.name ) return chunk.name;
+
+      console.log("\n");
+      for (const c of chunk.getAllAsyncChunks()) {
+        console.log("------>");
+        console.log( c );
+      }
+      console.log("\n",);
+
       if // try to figure out if it's a lazy loaded route or import
       (
-        chunk.blocks
-        && chunk.blocks.length > 0
-        && chunk.blocks[0] instanceof AsyncDependenciesBlock
-        && chunk.blocks[0].dependencies.length === 1
-        && (chunk.blocks[0].dependencies[0] instanceof ContextElementDependency
-          || chunk.blocks[0].dependencies[0] instanceof ImportDependency)
+        false
+        // chunkBlocks
+        // && chunkBlocks.length > 0
+        // && chunkBlocks[0] instanceof AsyncDependenciesBlock
+        // && chunkBlocks[0].dependencies.length === 1
+        // && (chunkBlocks[0].dependencies[0] instanceof ContextElementDependency
+        //   || chunkBlocks[0].dependencies[0] instanceof ImportDependency)
       )
       {
         const
-          req = chunk.blocks[0].dependencies[0].request,
+          req = chunkBlocks[0].dependencies[0].request,
           baseName = options.processFn(req);
         if ( !baseName ) return chunk.id;
         return getUniqueName(baseName);

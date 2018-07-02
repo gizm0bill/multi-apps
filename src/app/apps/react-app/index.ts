@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
 import { RegistrySrv, AppModuleConfig, IAppModuleConfig } from '../../core';
-import { of } from 'rxjs/observable/of';
+import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 import * as ReactApp from './static/js';

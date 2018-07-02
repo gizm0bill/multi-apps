@@ -1,5 +1,5 @@
 import { Injectable, Injector, ComponentFactory } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class MenuSrv

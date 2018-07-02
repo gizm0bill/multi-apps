@@ -2,7 +2,7 @@
 import { NgModule, NgModuleRef, Injectable, Inject } from '@angular/core';
 import { MatTableModule } from '@angular/material';
 import { RouterModule, CanLoad, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { of } from 'rxjs/observable/of';
+import { of } from 'rxjs';
 import { delay, map, switchMap } from 'rxjs/operators';
 import { RegistrySrv, AuthoritySrv, AppModuleConfig, IAppModuleConfig } from '../../core';
 

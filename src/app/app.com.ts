@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { environment } from 'environments/environment';
 import { AppState } from './app.state';
 import { AuthenticationSrv } from './core/auth.srv';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { MenuSrv } from './core/menu.srv';
 /**
  * App Component
