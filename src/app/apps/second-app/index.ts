@@ -8,7 +8,7 @@ import { CustomShaderMaterialDir } from './custom-shader.dir';
 import { SomeSrv, RegistrySrv, AppModuleConfig, IAppModuleConfig } from '../../core';
 import { ThreeJsMod } from '../../three-js';
 import { SharedMod } from '../../shared';
-import { of } from 'rxjs/observable/of';
+import { of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 
 export const SECOND_APP_MODULE_CONFIG: IAppModuleConfig =

@@ -1,7 +1,6 @@
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AuthenticationSrv, AuthoritySrv } from '../app/core/auth.srv';
 import { take, map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 export class FakeAuthenticationSrv implements AuthenticationSrv
 {

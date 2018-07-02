@@ -4,7 +4,7 @@ import { AppAuthGuard, AuthGuard } from './auth.grd';
 import { AuthenticationSrv, AuthoritySrv } from './auth.srv';
 import { RegistrySrv } from './registry.srv';
 import { SomeSrv } from './some.srv';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 // exports
 import { MenuSrv } from './menu.srv';
 export { RegistrySrv } from './registry.srv';

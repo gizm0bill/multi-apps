@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, Route } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import { Observable, of } from 'rxjs';
 
 // example data item
 export interface Element

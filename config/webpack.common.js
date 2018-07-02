@@ -4,16 +4,14 @@
  * problem with copy-webpack-plugin
  */
 const DefinePlugin = require('webpack/lib/DefinePlugin');
-const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlElementsPlugin = require('./html-elements-plugin');
 const RemapChunksWebpackPlugin = require('./remap-chunks-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
+const WebpackInlineManifestPlugin = require('webpack-inline-manifest-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
-const ngcWebpack = require('ngc-webpack');
-const ngTools = require('@ngtools/webpack');
+const AngularCompilerPlugin = require('@ngtools/webpack').AngularCompilerPlugin;
 const buildUtils = require('./build-utils');
 const helpers = require('./helpers');
 const glob = require('glob');
@@ -27,19 +25,17 @@ const fs = require('fs');
  */
 module.exports = function (options)
 {
-  const isProd = options.env === 'production';
-  const METADATA = Object.assign({}, buildUtils.DEFAULT_METADATA, options.metadata || {});
-  const ngcWebpackConfig = buildUtils.ngcWebpackSetup(isProd, METADATA);
-
-  const supportES2015 = buildUtils.supportES2015(METADATA.tsConfigPath);
-
-  const entry =
-  {
-    polyfills: './src/polyfills.browser.ts',
-    main: './src/main.browser.ts',
-  };
-
-  const i18n = {};
+  const
+    isProd = options.env === 'production',
+    METADATA = Object.assign({}, buildUtils.DEFAULT_METADATA, options.metadata || {}),
+    ngcWebpackConfig = buildUtils.ngcWebpackSetup(isProd, METADATA),
+    supportES2015 = buildUtils.supportES2015(METADATA.tsConfigPath),
+    entry =
+    {
+      polyfills: './src/polyfills.browser.ts',
+      main: './src/main.browser.ts',
+    },
+    i18n = {};
 
   if ( METADATA.locale ) 
   {
@@ -67,15 +63,14 @@ module.exports = function (options)
      * See: http://webpack.github.io/docs/configuration.html#entry
      */
     entry: entry,
-
     /**
      * Options affecting the resolving of modules.
      *
      * See: http://webpack.github.io/docs/configuration.html#resolve
      */
-    resolve: {
+    resolve:
+    {
       mainFields: [ ...(supportES2015 ? ['es2015'] : []), 'browser', 'module', 'main' ],
-
       /**
        * An array of extensions that should be used to resolve modules.
        *
@@ -93,7 +88,6 @@ module.exports = function (options)
         // support for specific app packages
         ...fs.readdirSync( helpers.root('src/app/apps') ).map( app => helpers.root('src/app/apps/'+app+'/node_modules' ) )
       ],
-
       /**
        * Add support for pipeable operators.
        *
@@ -115,22 +109,20 @@ module.exports = function (options)
        */
       alias: buildUtils.rxjsAlias(supportES2015)
     },
-
-    resolveLoader: { 
+    resolveLoader:
+    { 
       modules: ['node_modules', helpers.root('config')]
     },
-
     /**
      * Options affecting the normal modules.
      *
      * See: http://webpack.github.io/docs/configuration.html#module
      */
-    module: {
-
-      rules: [
-        
+    module:
+    {
+      rules:
+      [
         ...ngcWebpackConfig.loaders,
-
         /**
          * To string and css loader support for *.css files (from Angular components)
          * Returns file content as string
@@ -185,17 +177,10 @@ module.exports = function (options)
          * See: https://github.com/pugjs/pug-loader
          */
         { 
-          test: /\.(pug|jade)$/, // babel-loader because IE
+          test: /\.(pug|jade)$/,
           use: 
           [ 
             { loader: 'apply-loader' },
-            { 
-              loader: 'babel-loader', 
-              options: 
-              { 
-                presets: ['es2015'].map(dep => require.resolve(`babel-preset-${dep}`) )
-              } 
-            }, 
             { loader: 'pug-loader' }
           ]
         },
@@ -203,7 +188,6 @@ module.exports = function (options)
       ],
 
     },
-
     /**
      * Add additional plugins to the compiler.
      *
@@ -221,7 +205,8 @@ module.exports = function (options)
        * See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
        */
       // NOTE: when adding more properties make sure you include them in custom-typings.d.ts
-      new DefinePlugin({
+      new DefinePlugin
+      ({
         'ENV': JSON.stringify(METADATA.ENV),
         'HMR': METADATA.HMR,
         'AOT': METADATA.AOT,
@@ -229,34 +214,6 @@ module.exports = function (options)
         'process.env.NODE_ENV': JSON.stringify(METADATA.ENV),
         'process.env.HMR': METADATA.HMR
       }),
-
-      /**
-       * Plugin: CommonsChunkPlugin
-       * Description: Shares common code between the pages.
-       * It identifies common modules and put them into a commons chunk.
-       *
-       * See: https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
-       * See: https://github.com/webpack/docs/wiki/optimization#multi-page-app
-       */
-      new CommonsChunkPlugin
-      ({
-        name: 'polyfills',
-        chunks: ['polyfills']
-      }),
-
-      new CommonsChunkPlugin
-      ({
-        minChunks: Infinity,
-        name: 'inline'
-      }),
-      new CommonsChunkPlugin
-      ({
-        name: 'main',
-        async: 'common',
-        children: true,
-        minChunks: 2
-      }),
-
       /**
        * Plugin: CopyWebpackPlugin
        * Description: Copy files and directories in webpack.
@@ -276,7 +233,6 @@ module.exports = function (options)
         ],
         isProd ? { ignore: [ 'mock-data/**/*' ] } : undefined
       ),
-
       /*
       * Plugin: HtmlWebpackPlugin
       * Description: Simplifies creation of HTML files to serve your webpack bundles.
@@ -285,23 +241,26 @@ module.exports = function (options)
       *
       * See: https://github.com/ampedandwired/html-webpack-plugin
       */
-      new HtmlWebpackPlugin({
+      new HtmlWebpackPlugin
+      ({
         template: 'src/index.html',
         title: METADATA.title,
-        chunksSortMode: function (a, b) {
-          const entryPoints = ["inline","polyfills","sw-register","styles","vendor","main"];
+        chunksSortMode: (a, b) =>
+        {
+          const entryPoints = [ 'inline', 'polyfills' , 'sw-register', 'styles', 'vendor', 'main' ];
           return entryPoints.indexOf(a.names[0]) - entryPoints.indexOf(b.names[0]);
         },
         metadata: METADATA,
         inject: 'body',
         xhtml: true,
-        minify: isProd ? {
-          caseSensitive: true,
-          collapseWhitespace: true,
-          keepClosingSlash: true
-        } : false
+        minify: isProd
+          ? {
+            caseSensitive: true,
+            collapseWhitespace: true,
+            keepClosingSlash: true
+          }
+          : false
       }),
-
        /**
        * Plugin: ScriptExtHtmlWebpackPlugin
        * Description: Enhances html-webpack-plugin functionality
@@ -315,7 +274,6 @@ module.exports = function (options)
         preload: [/polyfills|vendor|main/],
         prefetch: [/chunk/]
       }),
-
       /**
        * Plugin: HtmlElementsPlugin
        * Description: Generate html tags based on javascript maps.
@@ -338,7 +296,8 @@ module.exports = function (options)
        *
        * Dependencies: HtmlWebpackPlugin
        */
-      new HtmlElementsPlugin({
+      new HtmlElementsPlugin
+      ({
         headTags: require('./head-config.common')
       }),
       new RemapChunksWebpackPlugin((req) => 
@@ -353,16 +312,14 @@ module.exports = function (options)
        * See: https://gist.github.com/sokra/27b24881210b56bbaff7
        */
       new LoaderOptionsPlugin({}),
-
-      new ngcWebpack.NgcWebpackPlugin(ngcWebpackConfig.plugin),
-
+      new AngularCompilerPlugin(ngcWebpackConfig.plugin),
       /**
        * Plugin: InlineManifestWebpackPlugin
        * Inline Webpack's manifest.js in index.html
        *
        * https://github.com/szrenwei/inline-manifest-webpack-plugin
        */
-      new InlineManifestWebpackPlugin(),
+      new WebpackInlineManifestPlugin,
     ],
 
     /**
@@ -371,7 +328,8 @@ module.exports = function (options)
      *
      * See: https://webpack.github.io/docs/configuration.html#node
      */
-    node: {
+    node:
+    {
       global: true,
       crypto: 'empty',
       process: true,

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanLoad, CanActivate, Route, Router,
    ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 import { LoadedRouterConfig } from '@angular/router/src/config';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { take, map, switchMap } from 'rxjs/operators';
 import { AuthoritySrv, AuthenticationSrv,
   AppModuleConfig, IAppModuleConfig } from './';
