@@ -54,6 +54,8 @@ npm-debug.log
 .webpack.json
 /compiled/
 dll/
+webpack-cache
+
 
 # Doc #
 /doc/
