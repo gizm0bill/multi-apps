@@ -4,6 +4,9 @@ const AsyncDependenciesBlock = require('webpack/lib/AsyncDependenciesBlock');
 const ContextElementDependency = require('webpack/lib/dependencies/ContextElementDependency');
 const ImportDependency = require('webpack/lib/dependencies/ImportDependency');
 
+/**
+ * options.processFn( block.dependency.request )
+ */
 class RemapChunksWebpackPlugin extends webpack.NamedChunksPlugin
 {
   constructor(config)
@@ -25,27 +28,22 @@ class RemapChunksWebpackPlugin extends webpack.NamedChunksPlugin
     {
       // entry chunks
       if ( chunk.name ) return chunk.name;
-
-      console.log("\n");
-      for (const c of chunk.getAllAsyncChunks()) {
-        console.log("------>");
-        console.log( c );
-      }
-      console.log("\n",);
-
+      const group = chunk.groupsIterable.values().next().value;
+      if ( !group ) return null;
+      
+      const block = group.blocksIterable.values().next().value;
       if // try to figure out if it's a lazy loaded route or import
       (
-        false
-        // chunkBlocks
-        // && chunkBlocks.length > 0
-        // && chunkBlocks[0] instanceof AsyncDependenciesBlock
-        // && chunkBlocks[0].dependencies.length === 1
-        // && (chunkBlocks[0].dependencies[0] instanceof ContextElementDependency
-        //   || chunkBlocks[0].dependencies[0] instanceof ImportDependency)
+        block
+        && block instanceof AsyncDependenciesBlock
+        && block.dependencies.length === 1
+        && (block.dependencies[0] instanceof ContextElementDependency
+          || block.dependencies[0] instanceof ImportDependency)
       )
       {
+        console.log( block.dependencies[0] );
         const
-          req = chunkBlocks[0].dependencies[0].request,
+          req = block.dependencies[0].request,
           baseName = options.processFn(req);
         if ( !baseName ) return chunk.id;
         return getUniqueName(baseName);
