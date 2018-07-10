@@ -1,4 +1,4 @@
-import { NgModule, ComponentFactoryResolver } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { MatTableModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { ROUTES, FirstAppResolve, FirstAppDeactivateGuard } from './routes';
@@ -6,7 +6,6 @@ import { MainCom } from './main.com';
 import { SubCom } from './sub.com';
 import { MenuCom } from './menu.com';
 import { SharedMod } from '../../shared';
-import { MenuSrv } from '../../core/menu.srv';
 
 @NgModule
 ({

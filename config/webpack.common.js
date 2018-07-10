@@ -17,6 +17,13 @@ const helpers = require('./helpers');
 const glob = require('glob');
 const path = require('path');
 const fs = require('fs');
+const shell = require('shelljs');
+
+// check if we got workspaces
+const
+  workspacesCmd = shell.exec('yarn workspaces info'),
+  workspaces = !workspacesCmd.code ? JSON.parse( workspacesCmd.stdout ) : [],
+  workspaceNames = Object.keys(workspaces);
 
 /**
  * Webpack configuration
@@ -226,9 +233,9 @@ module.exports = function (options)
       (
         [
           { from: 'src/assets', to: 'assets' },
-          ...fs.readdirSync( helpers.root('src/app/apps') )
-            .filter( app => fs.existsSync(helpers.root(`src/app/apps/${app}/assets`))  ) 
-            .map( app => ({ from: `src/app/apps/${app}/assets`, to: `assets/apps/${app}` }) ),
+          ...Object.values(workspaces)
+            .filter( workspace => fs.existsSync( helpers.root(`${workspace.location}/assets`) ) )
+            .map( (workspace, i) => ({ from: `${workspace.location}/assets`, to: `assets/${workspaceNames[i]}` }) ),
           { from: 'src/meta'}
         ],
         isProd ? { ignore: [ 'mock-data/**/*' ] } : undefined

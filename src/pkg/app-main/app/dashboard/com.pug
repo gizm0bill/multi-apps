@@ -1,0 +1,20 @@
+h1( i18n ) Hello 
+span( i18n ) Updated 
+  | { minutes, 
+  |   plural,
+  |   =0 {just now}
+  |   one {one minute ago}
+  |   =2 {a couple of minutes ago}
+  |   other { {{minutes}} minutes ago }
+  | }
+
+mat-grid-list( [cols]="maxGridWidth", rowHeight="200px", [gutterSize]="8" )
+  mat-grid-tile( *ngFor="let app of lekkerApps",
+    [colspan]="app?.weight||0",
+    [routerLink]="app?.link",
+    [@flyIn]="'in'" )
+    .app
+      mat-icon( *ngIf="isSvg(app?.icon)", svgIcon="{{app?.icon.split('.')[0]}}" )
+      mat-icon( *ngIf="!isSvg(app?.icon)" ) {{app?.icon}}
+      h4 {{(app?.name|async)||'...'}}
+      p 🔑 &nbsp; {{app?.roles?.join(', ')||'any'}}

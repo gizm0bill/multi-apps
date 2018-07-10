@@ -32,7 +32,7 @@ export class FirstAppDeactivateGuard implements CanDeactivate<any>
   canDeactivate()
   {
     this.menuSrv.com.next( undefined );
-    return true
+    return true;
   }
 }
 

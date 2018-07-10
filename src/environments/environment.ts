@@ -32,34 +32,18 @@ export const environment: Environment =
   ENV_PROVIDERS: [],
   appRoutes:
   [{
-    path: 'second',
-    loadChildren: './apps/second-app#SecondAppMod',
+    path: 'time-space-gun',
+    loadChildren: '../pkg-ward/acme#ACMETimeSpaceGunWardMod',
     canActivate: [ AppAuthGuard ],
-    data: { authorities: ['user_role_2'] }
   },
   {
-    path: 'first',
-    loadChildren: './apps/first-app-load-guard#FirstAppLoadGuardMod',
+    path: 'hen-grenade',
+    loadChildren: '../pkg-ward/acme#ACMEHenGrenadeWardMod',
     canActivate: [ AppAuthGuard ],
-    data: { authorities: ['user_role_1'] }
   },
   {
-    path: 'third',
-    loadChildren: './apps/third-app#ThirdAppMod',
-    // canLoad: [ AppAuthGuard ], won't report if not loaded
+    path: 'dehydrated-boulders',
+    loadChildren: '../pkg/acme-dehydrated-boulders#ACMEDehydratedBouldersMod',
     canActivate: [ AppAuthGuard ],
-    // data: { authorities: ['user_role_1', 'user_role_2'] }
-  },
-  // {
-  //   path: 'nth',
-  //   loadChildren: './apps/nth-app#NthAppMod',
-  //   canActivate: [ AppAuthGuard ],
-  //   // data: { authorities: ['user_role_2'] }
-  // },
-  {
-    path: 'react',
-    loadChildren: './apps/react-app#ReactAppMod',
-    canActivate: [ AppAuthGuard ]
   }]
 };
-
