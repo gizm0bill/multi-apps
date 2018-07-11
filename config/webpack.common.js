@@ -92,8 +92,6 @@ module.exports = function (options)
       [
         helpers.root('src'),
         helpers.root('node_modules'),
-        // support for specific app packages
-        ...fs.readdirSync( helpers.root('src/app/apps') ).map( app => helpers.root('src/app/apps/'+app+'/node_modules' ) )
       ],
       /**
        * Add support for pipeable operators.

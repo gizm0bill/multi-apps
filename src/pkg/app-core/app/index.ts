@@ -1,6 +1,8 @@
-import { InjectionToken, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { InjectionToken, ModuleWithProviders, NgModule, Optional, SkipSelf, Type } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PackageRegistrySrv } from './package-registry.srv';
+import { AuthenticationSrv } from './auth.srv';
+import { AuthGuard, AppAuthGuard } from './auth.grd';
 
 // Individual app config guideline
 export interface IAppModuleConfig
@@ -13,6 +15,9 @@ export interface IAppModuleConfig
 }
 export let AppModuleConfig = new InjectionToken<IAppModuleConfig>('app.pkg.cfg');
 
+export interface IAppModulePresentation extends Type<any> {}
+export let AppModulePresentation = new InjectionToken<IAppModulePresentation>('app.pkg.presentation');
+
 export * from './package-registry.srv';
 export * from './auth.grd';
 export * from './auth.srv';
@@ -22,6 +27,9 @@ export * from './auth.srv';
   providers:
   [
     PackageRegistrySrv,
+    AuthenticationSrv,
+    AuthGuard,
+    AppAuthGuard,
   ]
 })
 export class CoreMod

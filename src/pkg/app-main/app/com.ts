@@ -35,6 +35,6 @@ export class AppMainCom implements OnInit
   logout()
   {
     this.authSrv.logout();
-    this.router.navigate(['/auth']);
+    this.router.navigate(['/authentication']);
   }
 }

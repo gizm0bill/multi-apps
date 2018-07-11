@@ -1,9 +1,9 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding, ComponentFactoryResolver, Injector, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { trigger, state, transition, keyframes, animate, style } from '@angular/animations';
 import { delay, take, map, switchMap, flatMap }  from 'rxjs/operators';
 import { defer, of } from 'rxjs';
-import { PackageRegistrySrv, AppModuleConfig, AuthenticationSrv } from '@app/core';
+import { PackageRegistrySrv, AppModuleConfig, AuthenticationSrv, AppModulePresentation } from '@app/core';
 
 @Component
 ({
@@ -36,7 +36,11 @@ export class DashboardCom implements OnInit
     private reg: PackageRegistrySrv,
     private router: Router,
     private auth: AuthenticationSrv,
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private injector: Injector,
   ) {}
+
+  @ViewChild('target', {read: ViewContainerRef}) target: ViewContainerRef;
 
   minutes = 0;
   maxGridWidth = 4;
@@ -53,17 +57,24 @@ export class DashboardCom implements OnInit
       {
         return this.reg.apps.pipe
         (
-          map( module => ({ module, config: module.injector.get(AppModuleConfig)}) ),
-          flatMap( ({module, config}) => config.roles, ( {module, config}, roles ) => ({ module, ...config, roles }) ),
+          map( module => ({ module, config: module.injector.get(AppModuleConfig), presentation: module.injector.get(AppModulePresentation )}) ),
+          flatMap( ({module, config}) => config.roles, ( {module, config, presentation}, roles ) => ({ module, presentation, ...config, roles }) ),
           map( ({ module, roles, ...stuff}) =>
           {
+            const c = module.componentFactoryResolver.resolveComponentFactory( stuff.presentation );
+            this.target.createComponent( c, 0, module.injector );
+
             if ( roles.every( role => authorities.indexOf( role ) !== -1 ) )
               this.lekkerApps.push
               ({
-                // H4xX for infiloop - angular calling contructor on `instance` prop ¯\_(ツ)_/¯
+                // H4xX for infiloop - angular calling constructor on `instance` prop ¯\_(ツ)_/¯
                 // tbh setTimeout woulda sufficed
                 name: defer( () => of(module.instance.constructor.appName) ).pipe(delay( Math.random() * 10000 / 9 )),
-                roles, ...stuff
+                roles,
+
+                // presentation: c.create( this.injector ),
+
+                ...stuff,
               });
           })
         );

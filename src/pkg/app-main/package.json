@@ -2,6 +2,7 @@
   "name": "@app/main",
   "version": "1.0.0",
   "dependencies": {
-    "@app/core": "*"
+    "@app/core": "*",
+    "@app/shared": "*"
   }
 }

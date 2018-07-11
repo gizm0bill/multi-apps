@@ -8,13 +8,18 @@ span( i18n ) Updated
   |   other { {{minutes}} minutes ago }
   | }
 
+div( #target )
+
+.package-presentation
+  ng-container( ngProjectAs="description" ) wtf
 mat-grid-list( [cols]="maxGridWidth", rowHeight="200px", [gutterSize]="8" )
   mat-grid-tile( *ngFor="let app of lekkerApps",
     [colspan]="app?.weight||0",
     [routerLink]="app?.link",
     [@flyIn]="'in'" )
-    .app
-      mat-icon( *ngIf="isSvg(app?.icon)", svgIcon="{{app?.icon.split('.')[0]}}" )
-      mat-icon( *ngIf="!isSvg(app?.icon)" ) {{app?.icon}}
-      h4 {{(app?.name|async)||'...'}}
-      p 🔑 &nbsp; {{app?.roles?.join(', ')||'any'}}
+    //- ng-container( *ngComponentOutlet="app.presentation" )
+    //- .app
+    //-   mat-icon( *ngIf="isSvg(app?.icon)", svgIcon="{{app?.icon.split('.')[0]}}" )
+    //-   mat-icon( *ngIf="!isSvg(app?.icon)" ) {{app?.icon}}
+    //-   h4 {{(app?.name|async)||'...'}}
+    //-   p 🔑 &nbsp; {{app?.roles?.join(', ')||'any'}}

@@ -12,7 +12,6 @@ export class PackageRegistrySrv
   get apps(): ReplaySubject<NgModuleRef<any>> { return this._apps; }
   registerApp( app: NgModuleRef<any> )
   {
-    // TODO: debugger;
     // add app's own specific link after some custom logic
     // setTimeout because app.instance calls constructor, and we are now in the constructor call actually
     // TODO: not a good strategy, do something with observables, also see dashboard

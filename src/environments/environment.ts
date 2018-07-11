@@ -33,17 +33,18 @@ export const environment: Environment =
   appRoutes:
   [{
     path: 'time-space-gun',
-    loadChildren: '../pkg-ward/acme#ACMETimeSpaceGunWardMod',
+    // relative to baseUrl from tsconfig
+    // use full file path
+    loadChildren: 'pkg-ward/acme/time-space-gun#ACMETimeSpaceGunWardMod',
     canActivate: [ AppAuthGuard ],
   },
   {
     path: 'hen-grenade',
-    loadChildren: '../pkg-ward/acme#ACMEHenGrenadeWardMod',
+    loadChildren: 'pkg-ward/acme/hen-grenade#ACMEHenGrenadeWardMod',
     canActivate: [ AppAuthGuard ],
   },
-  {
+  { // no authentication guard
     path: 'dehydrated-boulders',
-    loadChildren: '../pkg/acme-dehydrated-boulders#ACMEDehydratedBouldersMod',
-    canActivate: [ AppAuthGuard ],
+    loadChildren: '../../acme-dehydrated-boulders/app#ACMEDehydratedBouldersMod',
   }]
 };

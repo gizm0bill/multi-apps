@@ -8,8 +8,9 @@ export class AuthenticationSrv
 {
   login( username: string, password: string, remember?: boolean ): Observable<any>
   {
-    localStorage.setItem('account', JSON.stringify({ authorities: ['user'] }));
-    return of( true );
+    localStorage.setItem('account', JSON.stringify({ authorities: ['hen-grenade', 'time-space-gun'] }));
+    this.account.next( localStorage.getItem('account') );
+    return this.account;
   }
   // TODO: maybe make server request to invalidate token
   logout()
