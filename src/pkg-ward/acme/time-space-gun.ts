@@ -26,11 +26,11 @@ export class ACMETimeSpaceGunWard implements CanLoad
 @Component
 ({
   template: `
-    <package-presentation>
+    <div class="package-presentation" title="ACME Time-Space Gun" image="/assets/@acme/time-space-gun/logo.jpg">
       <ng-container ngProjectAs="description" i18n>
         Use the ACME Time-Space Gun to move any creature forwards or backwards in time. Just make sure not to have the silly thing in reverse.
       </ng-container>
-    </package-presentation>
+    </div>
   `
 })
 export class ACMETimeSpaceGunPresentationCom {}
@@ -61,8 +61,12 @@ export class ACMETimeSpaceGunPresentationCom {}
 export class ACMETimeSpaceGunWardMod
 {
   static appName = 'ACME: Time-Space Gun';
-  constructor( private reg: PackageRegistrySrv, private mod: NgModuleRef<ACMETimeSpaceGunWardMod> )
+  constructor
+  (
+    private reg: PackageRegistrySrv,
+    private mod: NgModuleRef<ACMETimeSpaceGunWardMod>,
+  )
   {
-    // this.reg.registerApp(this.mod);
+    this.reg.registerApp(this.mod);
   }
 }

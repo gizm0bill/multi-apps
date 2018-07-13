@@ -8,6 +8,4 @@ span( i18n ) Updated
   |   other { {{minutes}} minutes ago }
   | }
 
-div( #target )
-
-ng-container( *ngFor="let app of lekkerApps" ): ng-container( *comFactoryOutlet="app" )
+main: ng-container( *ngFor="let app of lekkerApps" ): ng-container( *comFactoryOutlet="app; inputs: { link: app.link }" )

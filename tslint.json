@@ -7,6 +7,7 @@
   ],
   "rules": {
     // Custom
+    "no-bitwise": false,
     "trailing-comma": [false, {"multiline": "always", "singleline": "never"}],
     "interface-name": [false, "always-prefix"],
     "one-line": [true, "check-whitespace"],

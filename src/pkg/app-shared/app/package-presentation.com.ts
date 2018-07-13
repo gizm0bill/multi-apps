@@ -14,7 +14,7 @@ import { Component, Input, OnChanges, DoCheck } from '@angular/core';
         <ng-content select="description"></ng-content>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button>LIKE</button>
+        <button mat-button>VISIT</button>
         <button mat-button>SHARE</button>
       </mat-card-actions>
     </mat-card>

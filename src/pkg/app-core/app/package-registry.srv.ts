@@ -27,12 +27,13 @@ export class PackageRegistrySrv
             const cfg = ((route as any )._loadedConfig as LoadedRouterConfig);
             return cfg && cfg.module.instance === app.instance;
           });
+      if ( !~appRouteIdx ) return;
       app.injector.get(AppModuleConfig).link = this.router.createUrlTree
       ([
         this.router.config[appsRouteIdx].path,
         this.router.config[appsRouteIdx].children[appRouteIdx].path
       ]).toString();
       this.apps.next(app);
-    }, 5000);
+    } );
   }
 }

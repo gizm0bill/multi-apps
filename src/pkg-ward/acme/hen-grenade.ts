@@ -25,14 +25,13 @@ export class ACMEHenGrenadeWard implements CanLoad
 
 @Component
 ({
-  selector: 'xxx',
   template: `
     <div class="package-presentation" title="ACME Hen Grenade" image="/assets/@acme/hen-grenade/logo.jpg">
       <ng-container ngProjectAs="description" i18n>
         If you ever need to use an explosive in a chicken coop, the ACME Hen Grenade is your answer
       </ng-container>
     </div>
-  `
+  `,
 })
 export class ACMEHenGrenadePresentationCom {}
 
@@ -45,7 +44,11 @@ export class ACMEHenGrenadePresentationCom {}
     SharedMod,
     RouterModule.forChild
     ([
-      { path: '', loadChildren: '../../pkg/acme-hen-grenade/app#ACMEHenGrenadeMod', canLoad: [ ACMEHenGrenadeWard ] }
+      {
+        path: '',
+        canLoad: [ ACMEHenGrenadeWard ],
+        loadChildren: '../../pkg/acme-hen-grenade/app#ACMEHenGrenadeMod',
+      }
     ]),
   ],
   providers:

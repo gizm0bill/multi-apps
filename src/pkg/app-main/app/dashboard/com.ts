@@ -40,8 +40,6 @@ export class DashboardCom implements OnInit
     private injector: Injector,
   ) {}
 
-  @ViewChild('target', {read: ViewContainerRef}) target: ViewContainerRef;
-
   minutes = 0;
   maxGridWidth = 4;
   lekkerApps: any[] = [];
@@ -59,27 +57,13 @@ export class DashboardCom implements OnInit
         (
           map( module => ({ module, config: module.injector.get(AppModuleConfig), presentation: module.injector.get(AppModulePresentation )}) ),
           flatMap( ({module, config}) => config.roles, ( {module, config, presentation}, roles ) => ({ module, presentation, ...config, roles }) ),
-          map( ({ module, roles, ...stuff}) =>
+          map( ({ module, roles, presentation, ...stuff }) =>
           {
             if ( roles.every( role => authorities.indexOf( role ) !== -1 ) )
             {
-              const componentFactory = module.componentFactoryResolver.resolveComponentFactory( stuff.presentation );
-              this.lekkerApps.push({ com: componentFactory, inj: module.injector });
+              const componentFactory = module.componentFactoryResolver.resolveComponentFactory( presentation );
+              this.lekkerApps.push({ com: componentFactory, inj: module.injector, ...stuff });
             }
-
-            // if ( roles.every( role => authorities.indexOf( role ) !== -1 ) )
-            //   this.lekkerApps.push
-            //   ({
-            //     // H4xX for infiloop - angular calling constructor on `instance` prop ¯\_(ツ)_/¯
-            //     // tbh setTimeout woulda sufficed
-            //     name: defer( () => of(module.instance.constructor.appName) ).pipe(delay( Math.random() * 10000 / 9 )),
-            //     roles,
-            //     injector: module.injector,
-
-            //     // presentation: c.create( this.injector ),
-
-            //     ...stuff,
-            //   });
 
             // debugger;
           })

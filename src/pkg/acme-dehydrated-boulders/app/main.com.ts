@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   selector: 'acme-dehydrated-boulders',
   template: `
     …Dehydrated Boulders…
-    <img src="/assets/acme-dehydrated-boulders/logo.jpg" />
+    <img src="/assets/@acme/dehydrated-boulders/logo.jpg" />
   `,
 })
 
