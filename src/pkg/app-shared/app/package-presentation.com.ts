@@ -1,24 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, DoCheck } from '@angular/core';
 
 @Component
 ({
-  selector: 'package-presentation',
+  selector: '.package-presentation',
   template: `
-  <mat-card>
-    <mat-card-header>
-      <div mat-card-avatar></div>
-      <mat-card-title>…</mat-card-title>
-      <mat-card-subtitle>…</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image />
-    <mat-card-content>
-      <ng-content select="description"></ng-content>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
-    </mat-card-actions>
-  </mat-card>
+    <mat-card>
+      <img mat-card-image *ngIf="image" [src]="image" />
+      <mat-card-header>
+        <mat-card-title *ngIf="title">{{title}}</mat-card-title>
+        <mat-card-subtitle *ngIf="subtitle">{{subtitle}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <ng-content select="description"></ng-content>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions>
+    </mat-card>
   `,
 })
-export class PackagePresentationCom {}
+export class PackagePresentationCom
+{
+  @Input() image: string;
+  @Input() title: string;
+  @Input() subtitle: string;
+}

@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   selector: 'acme-hen-grenade',
   template: `
     …Hen Grenade…
-    <img src="/assets/acme-hen-grenade/logo.jpg" />
+    <img src="/assets/@acme/hen-grenade/logo.jpg" />
   `,
 })
 

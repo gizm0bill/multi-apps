@@ -10,14 +10,4 @@ span( i18n ) Updated
 
 div( #target )
 
-mat-grid-list( [cols]="maxGridWidth", rowHeight="200px", [gutterSize]="8" )
-  mat-grid-tile( *ngFor="let app of lekkerApps",
-    [colspan]="app?.weight||0",
-    [routerLink]="app?.link",
-    [@flyIn]="'in'" )
-    ng-container( *ngComponentOutlet="app.presentation; injector: injectorExpression" )
-    //- .app
-    //-   mat-icon( *ngIf="isSvg(app?.icon)", svgIcon="{{app?.icon.split('.')[0]}}" )
-    //-   mat-icon( *ngIf="!isSvg(app?.icon)" ) {{app?.icon}}
-    //-   h4 {{(app?.name|async)||'...'}}
-    //-   p 🔑 &nbsp; {{app?.roles?.join(', ')||'any'}}
+ng-container( *ngFor="let app of lekkerApps" ): ng-container( *comFactoryOutlet="app" )

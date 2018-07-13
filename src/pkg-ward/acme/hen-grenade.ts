@@ -25,12 +25,13 @@ export class ACMEHenGrenadeWard implements CanLoad
 
 @Component
 ({
+  selector: 'xxx',
   template: `
-    <package-presentation>
+    <div class="package-presentation" title="ACME Hen Grenade" image="/assets/@acme/hen-grenade/logo.jpg">
       <ng-container ngProjectAs="description" i18n>
         If you ever need to use an explosive in a chicken coop, the ACME Hen Grenade is your answer
       </ng-container>
-    </package-presentation>
+    </div>
   `
 })
 export class ACMEHenGrenadePresentationCom {}

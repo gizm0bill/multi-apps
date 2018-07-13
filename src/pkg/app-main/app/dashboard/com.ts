@@ -64,7 +64,7 @@ export class DashboardCom implements OnInit
             if ( roles.every( role => authorities.indexOf( role ) !== -1 ) )
             {
               const componentFactory = module.componentFactoryResolver.resolveComponentFactory( stuff.presentation );
-              componentFactory.create( module.injector, undefined, this.target.element.nativeElement );
+              this.lekkerApps.push({ com: componentFactory, inj: module.injector });
             }
 
             // if ( roles.every( role => authorities.indexOf( role ) !== -1 ) )

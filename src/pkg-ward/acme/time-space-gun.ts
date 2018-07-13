@@ -2,6 +2,7 @@ import { IAppModuleConfig, AppModuleConfig, PackageRegistrySrv, AppModulePresent
 import { RouterModule, CanLoad } from '@angular/router';
 import { Injectable, NgModuleRef, NgModule, Inject, Component } from '@angular/core';
 import { of } from 'rxjs';
+import { SharedMod } from '@app/shared';
 
 export const TIME_SPACE_GUN_CONFIG: IAppModuleConfig =
 {
@@ -40,6 +41,7 @@ export class ACMETimeSpaceGunPresentationCom {}
   entryComponents: [ ACMETimeSpaceGunPresentationCom ],
   imports:
   [
+    SharedMod,
     RouterModule.forChild
     ([
       {
@@ -61,6 +63,6 @@ export class ACMETimeSpaceGunWardMod
   static appName = 'ACME: Time-Space Gun';
   constructor( private reg: PackageRegistrySrv, private mod: NgModuleRef<ACMETimeSpaceGunWardMod> )
   {
-    this.reg.registerApp(this.mod);
+    // this.reg.registerApp(this.mod);
   }
 }

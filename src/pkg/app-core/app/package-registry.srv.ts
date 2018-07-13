@@ -33,6 +33,6 @@ export class PackageRegistrySrv
         this.router.config[appsRouteIdx].children[appRouteIdx].path
       ]).toString();
       this.apps.next(app);
-    });
+    }, 5000);
   }
 }
