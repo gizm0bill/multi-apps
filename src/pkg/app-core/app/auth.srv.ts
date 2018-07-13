@@ -8,8 +8,10 @@ export class AuthenticationSrv
 {
   login( username: string, password: string, remember?: boolean ): Observable<any>
   {
-    localStorage.setItem('account', JSON.stringify({ authorities: ['hen-grenade', 'time-space-gun'] }));
-    this.account.next( localStorage.getItem('account') );
+    // TODO: mock
+    const acc = { authorities: ['hen-grenade', 'time-space-gun'] };
+    localStorage.setItem('account', JSON.stringify(acc) );
+    this.account.next( acc );
     return this.account;
   }
   // TODO: maybe make server request to invalidate token

@@ -61,21 +61,27 @@ export class DashboardCom implements OnInit
           flatMap( ({module, config}) => config.roles, ( {module, config, presentation}, roles ) => ({ module, presentation, ...config, roles }) ),
           map( ({ module, roles, ...stuff}) =>
           {
-            const c = module.componentFactoryResolver.resolveComponentFactory( stuff.presentation );
-            this.target.createComponent( c, 0, module.injector );
-
             if ( roles.every( role => authorities.indexOf( role ) !== -1 ) )
-              this.lekkerApps.push
-              ({
-                // H4xX for infiloop - angular calling constructor on `instance` prop ¯\_(ツ)_/¯
-                // tbh setTimeout woulda sufficed
-                name: defer( () => of(module.instance.constructor.appName) ).pipe(delay( Math.random() * 10000 / 9 )),
-                roles,
+            {
+              const componentFactory = module.componentFactoryResolver.resolveComponentFactory( stuff.presentation );
+              componentFactory.create( module.injector, undefined, this.target.element.nativeElement );
+            }
 
-                // presentation: c.create( this.injector ),
+            // if ( roles.every( role => authorities.indexOf( role ) !== -1 ) )
+            //   this.lekkerApps.push
+            //   ({
+            //     // H4xX for infiloop - angular calling constructor on `instance` prop ¯\_(ツ)_/¯
+            //     // tbh setTimeout woulda sufficed
+            //     name: defer( () => of(module.instance.constructor.appName) ).pipe(delay( Math.random() * 10000 / 9 )),
+            //     roles,
+            //     injector: module.injector,
 
-                ...stuff,
-              });
+            //     // presentation: c.create( this.injector ),
+
+            //     ...stuff,
+            //   });
+
+            // debugger;
           })
         );
       })

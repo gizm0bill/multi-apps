@@ -4,9 +4,9 @@ import { Component } from '@angular/core';
 ({
   selector: 'package-presentation',
   template: `
-  <mat-card class="example-card">
+  <mat-card>
     <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
+      <div mat-card-avatar></div>
       <mat-card-title>…</mat-card-title>
       <mat-card-subtitle>…</mat-card-subtitle>
     </mat-card-header>

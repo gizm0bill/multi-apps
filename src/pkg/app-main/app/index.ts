@@ -16,8 +16,6 @@ import { DashboardCom } from './dashboard';
 import { AuthCom } from './auth';
 
 import 'styles/styles.scss';
-import { PackagePresentationCom } from './dashboard/package-presentation.com';
-
 
 // Application wide providers
 const APP_PROVIDERS =
@@ -44,7 +42,6 @@ interface StoreType
     NotFoundCom,
     DashboardCom,
     AuthCom,
-    PackagePresentationCom,
   ],
   /**
    * Import Angular's modules.

@@ -2,6 +2,7 @@ import { IAppModuleConfig, AppModuleConfig, PackageRegistrySrv, AppModulePresent
 import { RouterModule, CanLoad } from '@angular/router';
 import { Injectable, NgModuleRef, NgModule, Inject, Component, ComponentFactoryResolver } from '@angular/core';
 import { of } from 'rxjs';
+import { SharedMod } from '@app/shared';
 
 export const HEN_GRENADE_CONFIG: IAppModuleConfig =
 {
@@ -40,6 +41,7 @@ export class ACMEHenGrenadePresentationCom {}
   entryComponents: [ ACMEHenGrenadePresentationCom ],
   imports:
   [
+    SharedMod,
     RouterModule.forChild
     ([
       { path: '', loadChildren: '../../pkg/acme-hen-grenade/app#ACMEHenGrenadeMod', canLoad: [ ACMEHenGrenadeWard ] }
