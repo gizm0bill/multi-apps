@@ -84,7 +84,7 @@
   dependencies:
     tslib "^1.9.0"
 
-"@angular/core@~6.0.7":
+"@angular/core@*", "@angular/core@~6.0.7":
   version "6.0.7"
   resolved "https://registry.yarnpkg.com/@angular/core/-/core-6.0.7.tgz#f4a577615ee284d47250a506f7ba98296c0f9d4e"
   dependencies:
@@ -124,7 +124,7 @@
   dependencies:
     tslib "^1.9.0"
 
-"@angular/platform-server@~6.0.7":
+"@angular/platform-server@^6.0.7", "@angular/platform-server@~6.0.7":
   version "6.0.7"
   resolved "https://registry.yarnpkg.com/@angular/platform-server/-/platform-server-6.0.7.tgz#90892ad02c268578c5e0d978ed0f8d30c986be9e"
   dependencies:
@@ -132,7 +132,7 @@
     tslib "^1.9.0"
     xhr2 "^0.1.4"
 
-"@angular/router@~6.0.7":
+"@angular/router@*", "@angular/router@~6.0.7":
   version "6.0.7"
   resolved "https://registry.yarnpkg.com/@angular/router/-/router-6.0.7.tgz#53ce5dba1bb0f033687caca1451a12489a615415"
   dependencies:
@@ -203,6 +203,14 @@
     "@angular-devkit/core" "0.6.8"
     tree-kill "^1.0.0"
     webpack-sources "^1.1.0"
+
+"@nguniversal/express-engine@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@nguniversal/express-engine/-/express-engine-6.0.0.tgz#f8bc7b5e940afb1ffdbdcb1bb22665d440ea0b0b"
+
+"@nguniversal/module-map-ngfactory-loader@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@nguniversal/module-map-ngfactory-loader/-/module-map-ngfactory-loader-6.0.0.tgz#0dd26c3f1c26d17bb21b8dfc0da53d82b7f11028"
 
 "@nodelib/fs.stat@^1.0.1":
   version "1.1.0"
@@ -309,9 +317,9 @@
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/@types/source-map/-/source-map-0.5.1.tgz#7e74db5d06ab373a712356eebfaea2fad0ea2367"
 
-"@types/tapable@*":
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/@types/tapable/-/tapable-0.2.4.tgz#8181a228da46185439300e600c5ae3b3b3982585"
+"@types/tapable@*", "@types/tapable@1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@types/tapable/-/tapable-1.0.2.tgz#e13182e1b69871a422d7863e11a4a6f5b814a4bd"
 
 "@types/three@^0.89.0":
   version "0.89.0"

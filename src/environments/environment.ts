@@ -2,8 +2,8 @@
 
 import { ApplicationRef, NgModuleRef } from '@angular/core';
 import { enableDebugTools } from '@angular/platform-browser';
+import { AppAuthGuard } from '@app/core';
 import { Environment } from './model';
-import { AppAuthGuard } from '../app/core/auth.grd';
 
 Error.stackTraceLimit = Infinity;
 require('zone.js/dist/long-stack-trace-zone');
@@ -32,34 +32,19 @@ export const environment: Environment =
   ENV_PROVIDERS: [],
   appRoutes:
   [{
-    path: 'second',
-    loadChildren: './apps/second-app#SecondAppMod',
+    path: 'time-space-gun',
+    // relative to baseUrl from tsconfig
+    // use full file path
+    loadChildren: 'pkg-ward/acme/time-space-gun#ACMETimeSpaceGunWardMod',
     canActivate: [ AppAuthGuard ],
-    data: { authorities: ['user_role_2'] }
   },
   {
-    path: 'first',
-    loadChildren: './apps/first-app-load-guard#FirstAppLoadGuardMod',
+    path: 'hen-grenade',
+    loadChildren: 'pkg-ward/acme/hen-grenade#ACMEHenGrenadeWardMod',
     canActivate: [ AppAuthGuard ],
-    data: { authorities: ['user_role_1'] }
   },
-  {
-    path: 'third',
-    loadChildren: './apps/third-app#ThirdAppMod',
-    // canLoad: [ AppAuthGuard ], won't report if not loaded
-    canActivate: [ AppAuthGuard ],
-    // data: { authorities: ['user_role_1', 'user_role_2'] }
-  },
-  // {
-  //   path: 'nth',
-  //   loadChildren: './apps/nth-app#NthAppMod',
-  //   canActivate: [ AppAuthGuard ],
-  //   // data: { authorities: ['user_role_2'] }
-  // },
-  {
-    path: 'react',
-    loadChildren: './apps/react-app#ReactAppMod',
-    canActivate: [ AppAuthGuard ]
+  { // no authentication guard
+    path: 'dehydrated-boulders',
+    loadChildren: '../../acme-dehydrated-boulders/app#ACMEDehydratedBouldersMod',
   }]
 };
-

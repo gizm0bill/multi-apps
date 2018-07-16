@@ -41,7 +41,7 @@ class RemapChunksWebpackPlugin extends webpack.NamedChunksPlugin
           || block.dependencies[0] instanceof ImportDependency)
       )
       {
-        console.log( block.dependencies[0] );
+        // console.log( block.dependencies[0] );
         const
           req = block.dependencies[0].request,
           baseName = options.processFn(req);

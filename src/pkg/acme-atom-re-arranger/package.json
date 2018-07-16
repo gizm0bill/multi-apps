@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "name": "@acme/atom-re-arranger",
+  "dependencies": {
+    "@angular/platform-server": "^6.0.7",
+    "@nguniversal/express-engine": "^6.0.0",
+    "@nguniversal/module-map-ngfactory-loader": "^6.0.0"
+  },
+  "scripts": {
+    "build:client": "webpack -- --config answer-form/webpack.config.js",
+    "build:server": "webpack --config webpack.server.config.js --progress --colors"
+  }
+}

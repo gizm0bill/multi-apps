@@ -71,7 +71,7 @@ function ngcWebpackSetup(prod, metadata)
 {
   if ( !metadata ) metadata = DEFAULT_METADATA;
 
-  const buildOptimizer = prod;
+  const buildOptimizer = prod && metadata.AOT;
   const sourceMap = true; // TODO: apply based on tsconfig value?
   const ngcWebpackPluginOptions =
   {
@@ -104,7 +104,7 @@ function ngcWebpackSetup(prod, metadata)
   [
     {
       test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
-      use: metadata.AOT && buildOptimizer ? [ buildOptimizerLoader, '@ngtools/webpack' ] : [ '@ngtools/webpack' ]
+      use: buildOptimizer ? [ buildOptimizerLoader, '@ngtools/webpack' ] : [ '@ngtools/webpack' ]
     },
     ...buildOptimizer
       ? [ { test: /\.js$/, use: [ buildOptimizerLoader ] } ]

@@ -1,0 +1,29 @@
+.mat-chip-list, #loadingAudio
+{
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  height: 100px;
+  width: 500px;
+  z-index: 1;
+}
+:host
+{
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background:
+  {
+    image: url(/assets/@acme/dehydrated-boulders/logo.jpg);
+    size: contain;
+    position: center;
+    repeat: no-repeat;
+    blend-mode: lighten;
+  }
+}
+three-orbit-contols, three-renderer
+{
+  display: block;
+  height: 100%;
+}

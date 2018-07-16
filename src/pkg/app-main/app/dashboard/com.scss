@@ -1,0 +1,10 @@
+@import '~styles/vars';
+:host { display: block; padding: 12px; }
+main
+{
+  max-width: 61rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 30rem 30rem;
+  grid-column-gap: 1rem;
+}

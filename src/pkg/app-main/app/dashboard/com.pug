@@ -1,0 +1,11 @@
+h1( i18n ) Hello 
+span( i18n ) Updated 
+  | { minutes, 
+  |   plural,
+  |   =0 {just now}
+  |   one {one minute ago}
+  |   =2 {a couple of minutes ago}
+  |   other { {{minutes}} minutes ago }
+  | }
+
+main: ng-container( *ngFor="let app of lekkerApps" ): ng-container( *comFactoryOutlet="app; inputs: { link: app.link }" )
