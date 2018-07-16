@@ -1,12 +1,13 @@
 import { IAppModuleConfig, AppModuleConfig, PackageRegistrySrv, AppModulePresentation } from '@app/core';
 import { RouterModule, CanLoad } from '@angular/router';
 import { Injectable, NgModuleRef, NgModule, Inject, Component, ComponentFactoryResolver } from '@angular/core';
-import { of } from 'rxjs';
 import { SharedMod } from '@app/shared';
+import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 export const HEN_GRENADE_CONFIG: IAppModuleConfig =
 {
-  roles: of(['hen-grenade']),
+  roles: of(['hen-grenade']).pipe( delay( Math.random() * 10000 / 9) ,
 };
 
 @Injectable()
@@ -26,7 +27,7 @@ export class ACMEHenGrenadeWard implements CanLoad
 @Component
 ({
   template: `
-    <div class="package-presentation" title="ACME Hen Grenade" image="/assets/@acme/hen-grenade/logo.jpg">
+    <div class="package-presentation" title="ACME Hen Grenade" image="/assets/@acme/hen-grenade/logo.jpg" [link]="link">
       <ng-container ngProjectAs="description" i18n>
         If you ever need to use an explosive in a chicken coop, the ACME Hen Grenade is your answer
       </ng-container>
@@ -60,7 +61,6 @@ export class ACMEHenGrenadePresentationCom {}
 })
 export class ACMEHenGrenadeWardMod
 {
-  static appName = 'ACME: Hen Grenade';
   constructor
   (
     private reg: PackageRegistrySrv,

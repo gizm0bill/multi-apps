@@ -24,23 +24,19 @@ export const environment: Environment =
   ENV_PROVIDERS: [ ],
   appRoutes:
   [{
-    path: 'prod-second',
-    loadChildren: './apps/second-app#SecondAppMod',
+    path: 'prod-ready-time-space-gun',
+    // relative to baseUrl from tsconfig
+    // use full file path
+    loadChildren: 'pkg-ward/acme/time-space-gun#ACMETimeSpaceGunWardMod',
     canActivate: [ AppAuthGuard ],
   },
   {
-    path: 'prod-first',
-    loadChildren: './apps/first-app#FirstAppMod',
+    path: 'hen-grenade',
+    loadChildren: 'pkg-ward/acme/hen-grenade#ACMEHenGrenadeWardMod',
     canActivate: [ AppAuthGuard ],
   },
-  {
-    path: 'prod-third',
-    loadChildren: './apps/third-app#ThirdAppMod',
-    canActivate: [ AppAuthGuard ],
-  },
-  {
-    path: 'prod-nth',
-    loadChildren: './apps/nth-app#NthAppMod',
-    canActivate: [ AppAuthGuard ],
+  { // no authentication guard
+    path: 'dehydrated-boulders',
+    loadChildren: '../../acme-dehydrated-boulders/app#ACMEDehydratedBouldersMod',
   }]
 };

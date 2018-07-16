@@ -11,5 +11,5 @@ import { AuthenticationSrv } from '@app/core';
 export class AuthCom
 {
   constructor( public authSrv: AuthenticationSrv, private router: Router ) {}
-  goHome() { this.router.navigateByUrl('/home'); }
+  goHome() { this.router.navigateByUrl('/'); }
 }

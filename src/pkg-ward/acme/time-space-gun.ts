@@ -3,10 +3,11 @@ import { RouterModule, CanLoad } from '@angular/router';
 import { Injectable, NgModuleRef, NgModule, Inject, Component } from '@angular/core';
 import { of } from 'rxjs';
 import { SharedMod } from '@app/shared';
+import { delay } from 'rxjs/operators';
 
 export const TIME_SPACE_GUN_CONFIG: IAppModuleConfig =
 {
-  roles: of(['time-space-gun']),
+  roles: of(['time-space-gun']).pipe( delay( Math.random() * 10000 / 9) ),
 };
 
 @Injectable()
@@ -26,7 +27,7 @@ export class ACMETimeSpaceGunWard implements CanLoad
 @Component
 ({
   template: `
-    <div class="package-presentation" title="ACME Time-Space Gun" image="/assets/@acme/time-space-gun/logo.jpg">
+    <div class="package-presentation" title="ACME Time-Space Gun" image="/assets/@acme/time-space-gun/logo.jpg" [link]="link">
       <ng-container ngProjectAs="description" i18n>
         Use the ACME Time-Space Gun to move any creature forwards or backwards in time. Just make sure not to have the silly thing in reverse.
       </ng-container>

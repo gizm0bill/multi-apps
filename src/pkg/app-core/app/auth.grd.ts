@@ -68,8 +68,9 @@ export class AppAuthGuard implements CanActivate, CanLoad
 
     return false;
   }
-  canLoad(route: Route)
+  canLoad( route: Route )
   {
+    debugger;
     return this._can( route.data.authorities );
   }
 }

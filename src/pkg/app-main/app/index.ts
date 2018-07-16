@@ -16,7 +16,6 @@ import { DashboardCom } from './dashboard';
 import { AuthCom } from './auth';
 
 import 'styles/styles.scss';
-import { ACMEHenGrenadeWardMod } from 'pkg-ward/acme';
 
 // Application wide providers
 const APP_PROVIDERS =
@@ -49,7 +48,6 @@ interface StoreType
    */
   imports:
   [
-    ACMEHenGrenadeWardMod,
     BrowserModule,
     BrowserAnimationsModule,
     MatIconModule,

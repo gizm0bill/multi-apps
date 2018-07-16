@@ -10,20 +10,15 @@ export const ROUTES: Routes =
 [
   {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
+    component: DashboardCom,
+    canActivate: [ AuthGuard ],
+    data: { redirectTo: ['authentication'] }
   },
   {
     path: '',
     canActivate: [ AuthGuard ],
     data: { appsPlaceholder: true },
     children: environment.appRoutes
-  },
-  {
-    path: 'home',
-    component: DashboardCom,
-    canActivate: [ AuthGuard ],
-    data: { redirectTo: ['authentication'] }
   },
   {
     path: 'authentication',
@@ -36,7 +31,7 @@ export const ROUTES: Routes =
 ({
   imports:
   [
-    RouterModule.forRoot(ROUTES,
+    RouterModule.forRoot( ROUTES,
     {
       enableTracing: (!environment.production ? true : false),
       useHash: Boolean(history.pushState) === false,
