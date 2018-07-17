@@ -39,13 +39,14 @@ export class AppAuthGuard implements CanActivate, CanLoad
   {
     return this.auth.hasRole( authorities );
   }
-  canActivate(route: ActivatedRouteSnapshot)
+  canActivate( route: ActivatedRouteSnapshot )
   {
     // TODO: hacky, makes use of _loadedConfig, a prop added on RouterPreloader.preloadConfig
+    // https://github.com/angular/angular/issues/24069
     let module;
     if ( route.routeConfig.loadChildren &&
-      // TODO: https://github.com/angular/angular/blob/5.1.x/packages/router/src/router_preloader.ts#L128
-      ( {module} = (( route.routeConfig as any )._loadedConfig as LoadedRouterConfig )) )
+      // TODO: https://github.com/angular/angular/blob/6.0.x/packages/router/src/router_preloader.ts#L128
+      ( { module } = (( route.routeConfig as any )._loadedConfig as LoadedRouterConfig )) )
     {
       const moduleConfig = ( module.injector.get(AppModuleConfig) as IAppModuleConfig );
       return race
@@ -70,7 +71,6 @@ export class AppAuthGuard implements CanActivate, CanLoad
   }
   canLoad( route: Route )
   {
-    debugger;
     return this._can( route.data.authorities );
   }
 }

@@ -5,29 +5,47 @@
       <trans-unit id="f110930a7d2291b52ed67fd9034132851ce15a00" datatype="html">
         <source>Hello </source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/main/dashboard/com.ts</context>
+          <context context-type="sourcefile">src/pkg/app-main/app/dashboard/com.ts</context>
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
       <trans-unit id="471ce6b7c3a7270bc054c5f20cb597073e6c3faa" datatype="html">
         <source>Updated <x id="ICU" equiv-text="{ minutes, plural, =0 {...} one {...} =2 {...} other {...}}"/></source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/main/dashboard/com.ts</context>
+          <context context-type="sourcefile">src/pkg/app-main/app/dashboard/com.ts</context>
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7461c4d7b0df44970a25bbc515a742b88d31d58f" datatype="html">
         <source>{VAR_PLURAL, plural, =0 {just now} one {one minute ago} =2 {a couple of minutes ago} other {<x id="INTERPOLATION" equiv-text="{{minutes}}"/> minutes ago } }</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/main/dashboard/com.ts</context>
+          <context context-type="sourcefile">src/pkg/app-main/app/dashboard/com.ts</context>
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d1d9b0eb12f8c9a286ba629def518fc5b6d84648" datatype="html">
         <source>Loading <x id="INTERPOLATION" equiv-text="{{audioLoadedPercent}}"/>%</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/apps/second-app/main.com.ts</context>
+          <context context-type="sourcefile">src/pkg/acme-dehydrated-boulders/app/main.com.ts</context>
           <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="acme-hen-grenade-presentation-text" datatype="html">
+        <source>
+        If you ever need to use an explosive in a chicken coop, the ACME Hen Grenade is your answer
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/pkg-ward/acme/hen-grenade.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="acme-time-space-gun-presentation-text" datatype="html">
+        <source>
+        Use the ACME Time-Space Gun to move any creature forwards or backwards in time. Just make sure not to have the silly thing in reverse.
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/pkg-ward/acme/time-space-gun.ts</context>
+          <context context-type="linenumber">3</context>
         </context-group>
       </trans-unit>
     </body>

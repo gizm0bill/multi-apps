@@ -7,7 +7,7 @@ const ImportDependency = require('webpack/lib/dependencies/ImportDependency');
 /**
  * options.processFn( block.dependency.request )
  */
-class RemapChunksWebpackPlugin extends webpack.NamedChunksPlugin
+class CustomRenameChunksWebpackPlugin extends webpack.NamedChunksPlugin
 {
   constructor(config)
   {
@@ -55,4 +55,4 @@ class RemapChunksWebpackPlugin extends webpack.NamedChunksPlugin
   }
 }
 
-module.exports = RemapChunksWebpackPlugin;
+module.exports = CustomRenameChunksWebpackPlugin;

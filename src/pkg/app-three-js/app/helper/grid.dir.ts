@@ -7,7 +7,7 @@ import { AObject3D } from '../object-3d';
   selector: 'three-grid-helper',
   providers: [{ provide: AObject3D, useExisting: forwardRef(() => GridHelperDir) }]
 })
-export class GridHelperDir extends AObject3D<THREE.AxisHelper> implements AfterViewInit
+export class GridHelperDir extends AObject3D<THREE.AxesHelper> implements AfterViewInit
 {
   @Input() size: number;
   @Input() divisions: number;

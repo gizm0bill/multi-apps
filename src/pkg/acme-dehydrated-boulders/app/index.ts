@@ -12,7 +12,7 @@ import { CustomShaderMaterialDir } from './custom-shader.dir';
   declarations: [ MainCom, CustomShaderMaterialDir ],
   imports:
   [
-    SharedMod
+    SharedMod,
     MatChipsModule,
     MatIconModule,
     ThreeJsMod,
