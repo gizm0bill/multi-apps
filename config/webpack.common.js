@@ -6,7 +6,7 @@
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlElementsPlugin = require('./html-elements-plugin');
-const RemapChunksWebpackPlugin = require('./remap-chunks-plugin');
+const CustomRenameChunksWebpackPlugin = require('./custom-rename-chunks-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackInlineManifestPlugin = require('webpack-inline-manifest-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
@@ -305,9 +305,10 @@ module.exports = function (options)
       ({
         headTags: require('./head-config.common')
       }),
-      new RemapChunksWebpackPlugin((req) => 
+      // TODO: do something with workspaces command like copy plugin
+      new CustomRenameChunksWebpackPlugin((req) => 
       {
-        const match = req.match( new RegExp( helpers.root('src', 'app', 'apps', '(.*?)') + path.sep ) );
+        const match = req.match( new RegExp( helpers.root('src', 'pkg', 'acme-(.*?)') + path.sep ) );
         if ( !match ) return false;
         return match[1];
       }),

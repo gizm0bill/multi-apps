@@ -2,8 +2,8 @@
 
 import { ApplicationRef, NgModuleRef } from '@angular/core';
 import { enableDebugTools } from '@angular/platform-browser';
-import { AppAuthGuard } from '@app/core';
 import { Environment } from './model';
+import { AppAuthGuard } from '@app/core';
 
 Error.stackTraceLimit = Infinity;
 require('zone.js/dist/long-stack-trace-zone');

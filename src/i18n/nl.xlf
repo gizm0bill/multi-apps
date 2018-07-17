@@ -34,6 +34,30 @@
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="acme-hen-grenade-presentation-text" datatype="html">
+        <source>
+          If you ever need to use an explosive in a chicken coop, the ACME Hen Grenade is your answer
+        </source>
+        <target>
+          If you ever need to use an explosive in a chicken coop, the ACME Hen Grenade is your answer
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/pkg-ward/acme/hen-grenade.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="acme-time-space-gun-presentation-text" datatype="html">
+        <source>
+          Use the ACME Time-Space Gun to move any creature forwards or backwards in time. Just make sure not to have the silly thing in reverse.
+        </source>
+        <target>
+          Use the ACME Time-Space Gun to move any creature forwards or backwards in time. Just make sure not to have the silly thing in reverse.
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/pkg-ward/acme/time-space-gun.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
     </body>
   </file>
 </xliff>

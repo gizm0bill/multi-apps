@@ -40,7 +40,7 @@ export abstract class AObject3D<T extends THREE.Object3D> implements AfterViewIn
     if (this.translateZ !== undefined) this._object.translateZ(this.translateZ);
   }
 
-  protected addChild(object: THREE.Object3D): void
+  protected addChild(object: THREE.Object3D): any
   {
     return this._object.add(object);
   }

@@ -2,7 +2,7 @@
 import { enableProdMode, NgModuleRef } from '@angular/core';
 import { disableDebugTools } from '@angular/platform-browser';
 import { Environment } from './model';
-import { AppAuthGuard } from '../app/core/auth.grd';
+import { AppAuthGuard } from '@app/core';
 
 enableProdMode();
 

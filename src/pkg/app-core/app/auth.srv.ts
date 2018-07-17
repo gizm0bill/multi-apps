@@ -6,7 +6,7 @@ import { Observable, of, BehaviorSubject } from 'rxjs';
 @Injectable()
 export class AuthenticationSrv
 {
-  login( username: string, password: string, remember?: boolean ): Observable<any>
+  login( username?: string, password?: string, remember?: boolean ): Observable<any>
   {
     // TODO: mock
     const acc = { authorities: ['hen-grenade', 'time-space-gun'] };

@@ -321,9 +321,9 @@
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@types/tapable/-/tapable-1.0.2.tgz#e13182e1b69871a422d7863e11a4a6f5b814a4bd"
 
-"@types/three@^0.89.0":
-  version "0.89.0"
-  resolved "https://registry.yarnpkg.com/@types/three/-/three-0.89.0.tgz#c38fe39b7809d40ee00d16d08499dc4da26dcb4a"
+"@types/three@^0.92.12":
+  version "0.92.12"
+  resolved "https://registry.yarnpkg.com/@types/three/-/three-0.92.12.tgz#7c0f78bac119ccf9e3de159728fe0b12d9c6d410"
   dependencies:
     "@types/webvr-api" "*"
 
@@ -7220,9 +7220,15 @@ rxjs-tslint@^0.1.5:
     tslint "^5.9.1"
     tsutils "^2.25.0"
 
-rxjs@^6.0.0, rxjs@^6.1.0, rxjs@^6.2.1:
+rxjs@^6.0.0, rxjs@^6.1.0:
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.2.1.tgz#246cebec189a6cbc143a3ef9f62d6f4c91813ca1"
+  dependencies:
+    tslib "^1.9.0"
+
+rxjs@^6.2.2:
+  version "6.2.2"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.2.2.tgz#eb75fa3c186ff5289907d06483a77884586e1cf9"
   dependencies:
     tslib "^1.9.0"
 
@@ -8098,9 +8104,9 @@ text-table@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
 
-three@^0.89.0:
-  version "0.89.0"
-  resolved "https://registry.yarnpkg.com/three/-/three-0.89.0.tgz#4442d819a6168871b8d2cb37ad12a24310c170f5"
+three@^0.94.0:
+  version "0.94.0"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.94.0.tgz#4ce6db7f2bfbf79c2d73444aa6e3cfc08a32d762"
 
 through2@2.0.1:
   version "2.0.1"
