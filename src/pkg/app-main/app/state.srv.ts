@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-export interface InternalStateType 
+export interface InternalStateType
 {
   [key: string]: any;
 };

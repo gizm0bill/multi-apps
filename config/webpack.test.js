@@ -8,6 +8,7 @@ const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
+const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
 
 /**
  * Webpack Constants
@@ -20,8 +21,9 @@ const ENV = process.env.ENV = process.env.NODE_ENV = 'test';
  * See: http://webpack.github.io/docs/configuration.html#cli
  */
 module.exports = function (options) {
+  console.log( ">>>>", options );
   return {
-
+    mode: "development",
     /**
      * Source map for Karma from the help of karma-sourcemap-loader &  karma-webpack
      *
@@ -48,8 +50,11 @@ module.exports = function (options) {
       /**
        * Make sure root is src
        */
-      modules: [helpers.root('src'), 'node_modules']
+      modules: [helpers.root('src'), 'node_modules'],
+      plugins: [
+        new TsConfigPathsPlugin({ configFileName: helpers.root('tsconfig.json') })
 
+      ]
     },
 
     /**
@@ -173,7 +178,8 @@ module.exports = function (options) {
           exclude: [
             /\.(e2e|spec)\.ts$/,
             /node_modules/
-          ]
+          ],
+          options: { esModules: true }
         }
 
       ]

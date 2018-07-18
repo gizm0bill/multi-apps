@@ -5,7 +5,7 @@
     "paths": {
       "@app/*": ["./pkg/app-*/app"],
       "@acme/*": ["./pkg/acme-*/app"],
-      "@angular/*": ["node_modules/@angular/*"],
-    },
+      "@angular/*": ["node_modules/@angular/*", "../node_modules/@angular/*"]
+    }
   }
 }
